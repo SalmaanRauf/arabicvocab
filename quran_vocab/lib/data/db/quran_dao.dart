@@ -4,6 +4,7 @@ import '../models/ayah.dart';
 import '../models/root.dart';
 import '../models/surah.dart';
 import '../models/word.dart';
+import '../../services/audio/segment.dart';
 
 class QuranDao {
   const QuranDao(this.db);
@@ -70,5 +71,29 @@ class QuranDao {
       orderBy: 'id ASC',
     );
     return rows.map(Word.fromMap).toList();
+  }
+
+  Future<List<Segment>> fetchSegmentsForSurah(int surahId) async {
+    final rows = await db.rawQuery(
+      '''
+      SELECT words.id AS word_id, words.audio_start_ms, words.audio_end_ms
+      FROM words
+      INNER JOIN ayahs ON ayahs.id = words.ayah_id
+      WHERE ayahs.surah_id = ?
+        AND words.audio_start_ms IS NOT NULL
+        AND words.audio_end_ms IS NOT NULL
+      ORDER BY words.audio_start_ms ASC
+      ''',
+      [surahId],
+    );
+    return rows
+        .map(
+          (row) => Segment(
+            wordId: row['word_id'] as int,
+            startMs: row['audio_start_ms'] as int,
+            endMs: row['audio_end_ms'] as int,
+          ),
+        )
+        .toList();
   }
 }

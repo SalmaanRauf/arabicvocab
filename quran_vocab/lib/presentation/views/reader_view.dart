@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/surah.dart';
 import '../../data/models/word.dart';
+import '../state/audio_providers.dart';
 import '../state/quran_providers.dart';
 import '../widgets/ayah_widget.dart';
 
@@ -15,10 +16,12 @@ class ReaderView extends ConsumerStatefulWidget {
 
 class _ReaderViewState extends ConsumerState<ReaderView> {
   final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _audioUrlController = TextEditingController();
 
   @override
   void dispose() {
     _searchController.dispose();
+    _audioUrlController.dispose();
     super.dispose();
   }
 
@@ -28,6 +31,7 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
     final ayahsAsync = ref.watch(ayahsProvider);
     final searchResultsAsync = ref.watch(searchResultsProvider);
     final selectedSurahId = ref.watch(selectedSurahIdProvider);
+    final activeWordId = ref.watch(activeWordIdProvider).value;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,6 +41,8 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
         padding: const EdgeInsets.all(16),
         children: [
           _buildSearchCard(searchResultsAsync),
+          const SizedBox(height: 16),
+          _buildAudioControls(),
           const SizedBox(height: 16),
           _buildSurahPicker(
             surahsAsync: surahsAsync,
@@ -58,7 +64,7 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
                   for (final ayah in ayahs)
                     AyahWidget(
                       ayah: ayah,
-                      highlightWordId: null,
+                      highlightWordId: activeWordId,
                     ),
                 ],
               );
@@ -122,6 +128,68 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildAudioControls() {
+    return Consumer(
+      builder: (context, ref, _) {
+        final manager = ref.watch(audioManagerProvider);
+        final segmentsAsync = ref.watch(audioSegmentsProvider);
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Audio',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _audioUrlController,
+                  decoration: const InputDecoration(
+                    hintText: 'Paste MP3 URL',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                segmentsAsync.when(
+                  data: (segments) => Wrap(
+                    spacing: 12,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          final url = _audioUrlController.text.trim();
+                          if (url.isEmpty) {
+                            return;
+                          }
+                          await manager.setSource(
+                            url: url,
+                            segments: segments,
+                          );
+                        },
+                        child: const Text('Load audio'),
+                      ),
+                      OutlinedButton(
+                        onPressed: manager.play,
+                        child: const Text('Play'),
+                      ),
+                      OutlinedButton(
+                        onPressed: manager.pause,
+                        child: const Text('Pause'),
+                      ),
+                    ],
+                  ),
+                  loading: () => const LinearProgressIndicator(),
+                  error: (error, _) => Text('Audio segments error: $error'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
