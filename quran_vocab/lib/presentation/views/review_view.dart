@@ -104,7 +104,7 @@ class ReviewView extends ConsumerWidget {
       stability: progress.stability,
       difficulty: progress.difficulty,
       rating: rating,
-      elapsedDays: elapsedDays <= 0 ? 1 : elapsedDays,
+      elapsedDays: (elapsedDays <= 0 ? 1 : elapsedDays).toDouble(),
     );
     final nextDate = now.add(Duration(days: review.nextIntervalDays));
     final updated = UserProgress(

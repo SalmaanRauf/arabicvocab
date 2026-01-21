@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/word.dart';
+import '../state/settings_providers.dart';
 
-class WordChip extends StatelessWidget {
+class WordChip extends ConsumerWidget {
   const WordChip({
     super.key,
     required this.word,
@@ -15,8 +17,11 @@ class WordChip extends StatelessWidget {
   final bool isHighlighted;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final script = ref.watch(scriptPreferenceProvider);
+    final text =
+        script == ScriptType.indopak ? word.textIndopak : word.textUthmani;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
@@ -29,7 +34,7 @@ class WordChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
-          word.textUthmani,
+          text,
           textDirection: TextDirection.rtl,
           style: theme.textTheme.titleLarge?.copyWith(
             color:

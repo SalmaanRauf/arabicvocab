@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/audio_providers.dart';
+import '../state/settings_providers.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
@@ -18,6 +19,35 @@ class SettingsView extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Script',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<ScriptType>(
+              value: ref.watch(scriptPreferenceProvider),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Quran script',
+              ),
+              items: const [
+                DropdownMenuItem(
+                  value: ScriptType.uthmani,
+                  child: Text('Uthmani'),
+                ),
+                DropdownMenuItem(
+                  value: ScriptType.indopak,
+                  child: Text('IndoPak'),
+                ),
+              ],
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+                ref.read(scriptPreferenceProvider.notifier).state = value;
+              },
+            ),
+            const SizedBox(height: 20),
             Text(
               'Audio offset',
               style: Theme.of(context).textTheme.titleMedium,
