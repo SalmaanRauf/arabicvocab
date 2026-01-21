@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/ayah.dart';
 import '../models/root.dart';
 import '../models/surah.dart';
+import '../models/user_progress.dart';
 import '../models/word.dart';
 import '../../services/audio/segment.dart';
 
@@ -95,5 +96,36 @@ class QuranDao {
           ),
         )
         .toList();
+  }
+
+  Future<List<UserProgress>> fetchDueProgress(DateTime now) async {
+    final rows = await db.query(
+      'user_progress',
+      where: 'next_review_date <= ?',
+      whereArgs: [now.toIso8601String()],
+      orderBy: 'next_review_date ASC',
+    );
+    return rows.map(UserProgress.fromMap).toList();
+  }
+
+  Future<void> upsertUserProgress(UserProgress progress) async {
+    await db.insert(
+      'user_progress',
+      progress.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<Root?> fetchRootById(int rootId) async {
+    final rows = await db.query(
+      'roots',
+      where: 'id = ?',
+      whereArgs: [rootId],
+      limit: 1,
+    );
+    if (rows.isEmpty) {
+      return null;
+    }
+    return Root.fromMap(rows.first);
   }
 }
