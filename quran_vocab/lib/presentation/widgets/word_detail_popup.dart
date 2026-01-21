@@ -49,11 +49,22 @@ class WordDetailPopup extends ConsumerWidget {
               const SizedBox(height: 16),
 
               // Translation
-              _DetailRow(
-                label: 'Meaning',
-                value: word.translationEn,
-              ),
-              const SizedBox(height: 12),
+              if (word.translationEn.isNotEmpty) ...[
+                _DetailRow(
+                  label: 'Meaning',
+                  value: word.translationEn,
+                ),
+                const SizedBox(height: 12),
+              ] else ...[
+                Text(
+                  'Word-by-word translation not available for this verse yet.',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontStyle: FontStyle.italic,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
 
               // Root information
               rootAsync.when(

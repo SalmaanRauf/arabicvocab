@@ -4,17 +4,29 @@ import '../../data/data_loader.dart';
 import '../../data/models/root.dart';
 import '../../data/models/user_progress.dart';
 import '../../services/srs/fsrs.dart';
+import '../../services/storage/progress_storage.dart';
 import 'quran_providers.dart';
 
 final fsrsProvider = Provider<FSRS>((ref) => FSRS());
 
-/// In-memory user progress storage for web.
-/// In a production app, this would persist to IndexedDB or similar.
-class UserProgressNotifier extends StateNotifier<Map<int, UserProgress>> {
-  UserProgressNotifier() : super({});
+final progressStorageProvider = Provider<ProgressStorage>((ref) => ProgressStorage());
 
-  void upsert(UserProgress progress) {
+/// User progress storage with persistence.
+class UserProgressNotifier extends StateNotifier<Map<int, UserProgress>> {
+  UserProgressNotifier(this._storage) : super({});
+
+  final ProgressStorage _storage;
+  bool _loaded = false;
+
+  Future<void> loadFromStorage() async {
+    if (_loaded) return;
+    state = await _storage.load();
+    _loaded = true;
+  }
+
+  Future<void> upsert(UserProgress progress) async {
     state = {...state, progress.rootId: progress};
+    await _storage.upsert(progress);
   }
 
   List<UserProgress> getDue(DateTime now) {
@@ -26,20 +38,24 @@ class UserProgressNotifier extends StateNotifier<Map<int, UserProgress>> {
 
 final userProgressNotifierProvider =
     StateNotifierProvider<UserProgressNotifier, Map<int, UserProgress>>(
-  (ref) => UserProgressNotifier(),
+  (ref) {
+    final storage = ref.watch(progressStorageProvider);
+    return UserProgressNotifier(storage);
+  },
 );
 
 final dueProgressProvider = FutureProvider<List<UserProgress>>((ref) async {
   await ref.watch(dataLoaderProvider.future);
   final notifier = ref.watch(userProgressNotifierProvider.notifier);
+  await notifier.loadFromStorage();
 
-  // Get due items from in-memory storage
+  // Get due items from storage
   final dueItems = notifier.getDue(DateTime.now());
 
   // If no items due, seed with some initial roots for review
-  if (dueItems.isEmpty) {
+  if (dueItems.isEmpty && ref.read(userProgressNotifierProvider).isEmpty) {
     final loader = DataLoader.instance;
-    final roots = loader.roots.take(5).toList();
+    final roots = loader.roots.take(10).toList(); // Start with 10 high-frequency roots
     for (final root in roots) {
       final progress = UserProgress(
         rootId: root.id,
@@ -48,7 +64,7 @@ final dueProgressProvider = FutureProvider<List<UserProgress>>((ref) async {
         difficulty: 5.0,
         nextReviewDate: DateTime.now(),
       );
-      notifier.upsert(progress);
+      await notifier.upsert(progress);
     }
     return notifier.getDue(DateTime.now().add(const Duration(seconds: 1)));
   }

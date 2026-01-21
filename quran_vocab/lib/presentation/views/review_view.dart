@@ -113,11 +113,11 @@ class ReviewView extends ConsumerWidget {
     );
   }
 
-  void _handleReview(
+  Future<void> _handleReview(
     WidgetRef ref,
     UserProgress progress,
     int rating,
-  ) {
+  ) async {
     final fsrs = ref.read(fsrsProvider);
     final now = DateTime.now();
     final elapsedDays = now.difference(progress.nextReviewDate).inDays;
@@ -136,8 +136,8 @@ class ReviewView extends ConsumerWidget {
       nextReviewDate: nextDate,
     );
 
-    // Update in-memory storage
-    ref.read(userProgressNotifierProvider.notifier).upsert(updated);
+    // Persist to localStorage
+    await ref.read(userProgressNotifierProvider.notifier).upsert(updated);
     ref.read(currentSrsIndexProvider.notifier).state++;
     ref.invalidate(dueProgressProvider);
     ref.invalidate(currentRootProvider);

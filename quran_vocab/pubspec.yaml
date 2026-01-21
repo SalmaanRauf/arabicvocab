@@ -44,6 +44,7 @@ dependencies:
   path: ^1.9.0
   intl: ^0.19.0
   collection: ^1.18.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -72,7 +73,7 @@ flutter:
 
   assets:
     - assets/data/surahs.json
-    - assets/data/ayahs_sample.json
+    - assets/data/ayahs_full.json
     - assets/data/words_sample.json
     - assets/data/roots.json
 

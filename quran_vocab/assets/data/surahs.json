@@ -1,116 +1,800 @@
 [
-  {"id":1,"name_arabic":"الفاتحة","name_english":"Al-Fatiha","verse_count":7,"type":"Meccan"},
-  {"id":2,"name_arabic":"البقرة","name_english":"Al-Baqarah","verse_count":286,"type":"Medinan"},
-  {"id":3,"name_arabic":"آل عمران","name_english":"Aal-E-Imran","verse_count":200,"type":"Medinan"},
-  {"id":4,"name_arabic":"النساء","name_english":"An-Nisa","verse_count":176,"type":"Medinan"},
-  {"id":5,"name_arabic":"المائدة","name_english":"Al-Ma'idah","verse_count":120,"type":"Medinan"},
-  {"id":6,"name_arabic":"الأنعام","name_english":"Al-An'am","verse_count":165,"type":"Meccan"},
-  {"id":7,"name_arabic":"الأعراف","name_english":"Al-A'raf","verse_count":206,"type":"Meccan"},
-  {"id":8,"name_arabic":"الأنفال","name_english":"Al-Anfal","verse_count":75,"type":"Medinan"},
-  {"id":9,"name_arabic":"التوبة","name_english":"At-Tawbah","verse_count":129,"type":"Medinan"},
-  {"id":10,"name_arabic":"يونس","name_english":"Yunus","verse_count":109,"type":"Meccan"},
-  {"id":11,"name_arabic":"هود","name_english":"Hud","verse_count":123,"type":"Meccan"},
-  {"id":12,"name_arabic":"يوسف","name_english":"Yusuf","verse_count":111,"type":"Meccan"},
-  {"id":13,"name_arabic":"الرعد","name_english":"Ar-Ra'd","verse_count":43,"type":"Medinan"},
-  {"id":14,"name_arabic":"إبراهيم","name_english":"Ibrahim","verse_count":52,"type":"Meccan"},
-  {"id":15,"name_arabic":"الحجر","name_english":"Al-Hijr","verse_count":99,"type":"Meccan"},
-  {"id":16,"name_arabic":"النحل","name_english":"An-Nahl","verse_count":128,"type":"Meccan"},
-  {"id":17,"name_arabic":"الإسراء","name_english":"Al-Isra","verse_count":111,"type":"Meccan"},
-  {"id":18,"name_arabic":"الكهف","name_english":"Al-Kahf","verse_count":110,"type":"Meccan"},
-  {"id":19,"name_arabic":"مريم","name_english":"Maryam","verse_count":98,"type":"Meccan"},
-  {"id":20,"name_arabic":"طه","name_english":"Taha","verse_count":135,"type":"Meccan"},
-  {"id":21,"name_arabic":"الأنبياء","name_english":"Al-Anbiya","verse_count":112,"type":"Meccan"},
-  {"id":22,"name_arabic":"الحج","name_english":"Al-Hajj","verse_count":78,"type":"Medinan"},
-  {"id":23,"name_arabic":"المؤمنون","name_english":"Al-Mu'minun","verse_count":118,"type":"Meccan"},
-  {"id":24,"name_arabic":"النور","name_english":"An-Nur","verse_count":64,"type":"Medinan"},
-  {"id":25,"name_arabic":"الفرقان","name_english":"Al-Furqan","verse_count":77,"type":"Meccan"},
-  {"id":26,"name_arabic":"الشعراء","name_english":"Ash-Shu'ara","verse_count":227,"type":"Meccan"},
-  {"id":27,"name_arabic":"النمل","name_english":"An-Naml","verse_count":93,"type":"Meccan"},
-  {"id":28,"name_arabic":"القصص","name_english":"Al-Qasas","verse_count":88,"type":"Meccan"},
-  {"id":29,"name_arabic":"العنكبوت","name_english":"Al-Ankabut","verse_count":69,"type":"Meccan"},
-  {"id":30,"name_arabic":"الروم","name_english":"Ar-Rum","verse_count":60,"type":"Meccan"},
-  {"id":31,"name_arabic":"لقمان","name_english":"Luqman","verse_count":34,"type":"Meccan"},
-  {"id":32,"name_arabic":"السجدة","name_english":"As-Sajdah","verse_count":30,"type":"Meccan"},
-  {"id":33,"name_arabic":"الأحزاب","name_english":"Al-Ahzab","verse_count":73,"type":"Medinan"},
-  {"id":34,"name_arabic":"سبأ","name_english":"Saba","verse_count":54,"type":"Meccan"},
-  {"id":35,"name_arabic":"فاطر","name_english":"Fatir","verse_count":45,"type":"Meccan"},
-  {"id":36,"name_arabic":"يس","name_english":"Ya-Sin","verse_count":83,"type":"Meccan"},
-  {"id":37,"name_arabic":"الصافات","name_english":"As-Saffat","verse_count":182,"type":"Meccan"},
-  {"id":38,"name_arabic":"ص","name_english":"Sad","verse_count":88,"type":"Meccan"},
-  {"id":39,"name_arabic":"الزمر","name_english":"Az-Zumar","verse_count":75,"type":"Meccan"},
-  {"id":40,"name_arabic":"غافر","name_english":"Ghafir","verse_count":85,"type":"Meccan"},
-  {"id":41,"name_arabic":"فصلت","name_english":"Fussilat","verse_count":54,"type":"Meccan"},
-  {"id":42,"name_arabic":"الشورى","name_english":"Ash-Shura","verse_count":53,"type":"Meccan"},
-  {"id":43,"name_arabic":"الزخرف","name_english":"Az-Zukhruf","verse_count":89,"type":"Meccan"},
-  {"id":44,"name_arabic":"الدخان","name_english":"Ad-Dukhan","verse_count":59,"type":"Meccan"},
-  {"id":45,"name_arabic":"الجاثية","name_english":"Al-Jathiyah","verse_count":37,"type":"Meccan"},
-  {"id":46,"name_arabic":"الأحقاف","name_english":"Al-Ahqaf","verse_count":35,"type":"Meccan"},
-  {"id":47,"name_arabic":"محمد","name_english":"Muhammad","verse_count":38,"type":"Medinan"},
-  {"id":48,"name_arabic":"الفتح","name_english":"Al-Fath","verse_count":29,"type":"Medinan"},
-  {"id":49,"name_arabic":"الحجرات","name_english":"Al-Hujurat","verse_count":18,"type":"Medinan"},
-  {"id":50,"name_arabic":"ق","name_english":"Qaf","verse_count":45,"type":"Meccan"},
-  {"id":51,"name_arabic":"الذاريات","name_english":"Adh-Dhariyat","verse_count":60,"type":"Meccan"},
-  {"id":52,"name_arabic":"الطور","name_english":"At-Tur","verse_count":49,"type":"Meccan"},
-  {"id":53,"name_arabic":"النجم","name_english":"An-Najm","verse_count":62,"type":"Meccan"},
-  {"id":54,"name_arabic":"القمر","name_english":"Al-Qamar","verse_count":55,"type":"Meccan"},
-  {"id":55,"name_arabic":"الرحمن","name_english":"Ar-Rahman","verse_count":78,"type":"Medinan"},
-  {"id":56,"name_arabic":"الواقعة","name_english":"Al-Waqi'ah","verse_count":96,"type":"Meccan"},
-  {"id":57,"name_arabic":"الحديد","name_english":"Al-Hadid","verse_count":29,"type":"Medinan"},
-  {"id":58,"name_arabic":"المجادلة","name_english":"Al-Mujadilah","verse_count":22,"type":"Medinan"},
-  {"id":59,"name_arabic":"الحشر","name_english":"Al-Hashr","verse_count":24,"type":"Medinan"},
-  {"id":60,"name_arabic":"الممتحنة","name_english":"Al-Mumtahanah","verse_count":13,"type":"Medinan"},
-  {"id":61,"name_arabic":"الصف","name_english":"As-Saff","verse_count":14,"type":"Medinan"},
-  {"id":62,"name_arabic":"الجمعة","name_english":"Al-Jumu'ah","verse_count":11,"type":"Medinan"},
-  {"id":63,"name_arabic":"المنافقون","name_english":"Al-Munafiqun","verse_count":11,"type":"Medinan"},
-  {"id":64,"name_arabic":"التغابن","name_english":"At-Taghabun","verse_count":18,"type":"Medinan"},
-  {"id":65,"name_arabic":"الطلاق","name_english":"At-Talaq","verse_count":12,"type":"Medinan"},
-  {"id":66,"name_arabic":"التحريم","name_english":"At-Tahrim","verse_count":12,"type":"Medinan"},
-  {"id":67,"name_arabic":"الملك","name_english":"Al-Mulk","verse_count":30,"type":"Meccan"},
-  {"id":68,"name_arabic":"القلم","name_english":"Al-Qalam","verse_count":52,"type":"Meccan"},
-  {"id":69,"name_arabic":"الحاقة","name_english":"Al-Haqqah","verse_count":52,"type":"Meccan"},
-  {"id":70,"name_arabic":"المعارج","name_english":"Al-Ma'arij","verse_count":44,"type":"Meccan"},
-  {"id":71,"name_arabic":"نوح","name_english":"Nuh","verse_count":28,"type":"Meccan"},
-  {"id":72,"name_arabic":"الجن","name_english":"Al-Jinn","verse_count":28,"type":"Meccan"},
-  {"id":73,"name_arabic":"المزمل","name_english":"Al-Muzzammil","verse_count":20,"type":"Meccan"},
-  {"id":74,"name_arabic":"المدثر","name_english":"Al-Muddaththir","verse_count":56,"type":"Meccan"},
-  {"id":75,"name_arabic":"القيامة","name_english":"Al-Qiyamah","verse_count":40,"type":"Meccan"},
-  {"id":76,"name_arabic":"الإنسان","name_english":"Al-Insan","verse_count":31,"type":"Medinan"},
-  {"id":77,"name_arabic":"المرسلات","name_english":"Al-Mursalat","verse_count":50,"type":"Meccan"},
-  {"id":78,"name_arabic":"النبأ","name_english":"An-Naba","verse_count":40,"type":"Meccan"},
-  {"id":79,"name_arabic":"النازعات","name_english":"An-Nazi'at","verse_count":46,"type":"Meccan"},
-  {"id":80,"name_arabic":"عبس","name_english":"Abasa","verse_count":42,"type":"Meccan"},
-  {"id":81,"name_arabic":"التكوير","name_english":"At-Takwir","verse_count":29,"type":"Meccan"},
-  {"id":82,"name_arabic":"الانفطار","name_english":"Al-Infitar","verse_count":19,"type":"Meccan"},
-  {"id":83,"name_arabic":"المطففين","name_english":"Al-Mutaffifin","verse_count":36,"type":"Meccan"},
-  {"id":84,"name_arabic":"الانشقاق","name_english":"Al-Inshiqaq","verse_count":25,"type":"Meccan"},
-  {"id":85,"name_arabic":"البروج","name_english":"Al-Buruj","verse_count":22,"type":"Meccan"},
-  {"id":86,"name_arabic":"الطارق","name_english":"At-Tariq","verse_count":17,"type":"Meccan"},
-  {"id":87,"name_arabic":"الأعلى","name_english":"Al-A'la","verse_count":19,"type":"Meccan"},
-  {"id":88,"name_arabic":"الغاشية","name_english":"Al-Ghashiyah","verse_count":26,"type":"Meccan"},
-  {"id":89,"name_arabic":"الفجر","name_english":"Al-Fajr","verse_count":30,"type":"Meccan"},
-  {"id":90,"name_arabic":"البلد","name_english":"Al-Balad","verse_count":20,"type":"Meccan"},
-  {"id":91,"name_arabic":"الشمس","name_english":"Ash-Shams","verse_count":15,"type":"Meccan"},
-  {"id":92,"name_arabic":"الليل","name_english":"Al-Layl","verse_count":21,"type":"Meccan"},
-  {"id":93,"name_arabic":"الضحى","name_english":"Ad-Duha","verse_count":11,"type":"Meccan"},
-  {"id":94,"name_arabic":"الشرح","name_english":"Ash-Sharh","verse_count":8,"type":"Meccan"},
-  {"id":95,"name_arabic":"التين","name_english":"At-Tin","verse_count":8,"type":"Meccan"},
-  {"id":96,"name_arabic":"العلق","name_english":"Al-Alaq","verse_count":19,"type":"Meccan"},
-  {"id":97,"name_arabic":"القدر","name_english":"Al-Qadr","verse_count":5,"type":"Meccan"},
-  {"id":98,"name_arabic":"البينة","name_english":"Al-Bayyinah","verse_count":8,"type":"Medinan"},
-  {"id":99,"name_arabic":"الزلزلة","name_english":"Az-Zalzalah","verse_count":8,"type":"Medinan"},
-  {"id":100,"name_arabic":"العاديات","name_english":"Al-Adiyat","verse_count":11,"type":"Meccan"},
-  {"id":101,"name_arabic":"القارعة","name_english":"Al-Qari'ah","verse_count":11,"type":"Meccan"},
-  {"id":102,"name_arabic":"التكاثر","name_english":"At-Takathur","verse_count":8,"type":"Meccan"},
-  {"id":103,"name_arabic":"العصر","name_english":"Al-Asr","verse_count":3,"type":"Meccan"},
-  {"id":104,"name_arabic":"الهمزة","name_english":"Al-Humazah","verse_count":9,"type":"Meccan"},
-  {"id":105,"name_arabic":"الفيل","name_english":"Al-Fil","verse_count":5,"type":"Meccan"},
-  {"id":106,"name_arabic":"قريش","name_english":"Quraysh","verse_count":4,"type":"Meccan"},
-  {"id":107,"name_arabic":"الماعون","name_english":"Al-Ma'un","verse_count":7,"type":"Meccan"},
-  {"id":108,"name_arabic":"الكوثر","name_english":"Al-Kawthar","verse_count":3,"type":"Meccan"},
-  {"id":109,"name_arabic":"الكافرون","name_english":"Al-Kafirun","verse_count":6,"type":"Meccan"},
-  {"id":110,"name_arabic":"النصر","name_english":"An-Nasr","verse_count":3,"type":"Medinan"},
-  {"id":111,"name_arabic":"المسد","name_english":"Al-Masad","verse_count":5,"type":"Meccan"},
-  {"id":112,"name_arabic":"الإخلاص","name_english":"Al-Ikhlas","verse_count":4,"type":"Meccan"},
-  {"id":113,"name_arabic":"الفلق","name_english":"Al-Falaq","verse_count":5,"type":"Meccan"},
-  {"id":114,"name_arabic":"الناس","name_english":"An-Nas","verse_count":6,"type":"Meccan"}
+  {
+    "id": 1,
+    "name_arabic": "سُورَةُ ٱلْفَاتِحَةِ",
+    "name_english": "Al-Faatiha",
+    "verse_count": 7,
+    "type": "Meccan"
+  },
+  {
+    "id": 2,
+    "name_arabic": "سُورَةُ البَقَرَةِ",
+    "name_english": "Al-Baqara",
+    "verse_count": 286,
+    "type": "Medinan"
+  },
+  {
+    "id": 3,
+    "name_arabic": "سُورَةُ آلِ عِمۡرَانَ",
+    "name_english": "Aal-i-Imraan",
+    "verse_count": 200,
+    "type": "Medinan"
+  },
+  {
+    "id": 4,
+    "name_arabic": "سُورَةُ النِّسَاءِ",
+    "name_english": "An-Nisaa",
+    "verse_count": 176,
+    "type": "Medinan"
+  },
+  {
+    "id": 5,
+    "name_arabic": "سُورَةُ المَائـِدَةِ",
+    "name_english": "Al-Maaida",
+    "verse_count": 120,
+    "type": "Medinan"
+  },
+  {
+    "id": 6,
+    "name_arabic": "سُورَةُ الأَنۡعَامِ",
+    "name_english": "Al-An'aam",
+    "verse_count": 165,
+    "type": "Meccan"
+  },
+  {
+    "id": 7,
+    "name_arabic": "سُورَةُ الأَعۡرَافِ",
+    "name_english": "Al-A'raaf",
+    "verse_count": 206,
+    "type": "Meccan"
+  },
+  {
+    "id": 8,
+    "name_arabic": "سُورَةُ الأَنفَالِ",
+    "name_english": "Al-Anfaal",
+    "verse_count": 75,
+    "type": "Medinan"
+  },
+  {
+    "id": 9,
+    "name_arabic": "سُورَةُ التَّوۡبَةِ",
+    "name_english": "At-Tawba",
+    "verse_count": 129,
+    "type": "Medinan"
+  },
+  {
+    "id": 10,
+    "name_arabic": "سُورَةُ يُونُسَ",
+    "name_english": "Yunus",
+    "verse_count": 109,
+    "type": "Meccan"
+  },
+  {
+    "id": 11,
+    "name_arabic": "سُورَةُ هُودٍ",
+    "name_english": "Hud",
+    "verse_count": 123,
+    "type": "Meccan"
+  },
+  {
+    "id": 12,
+    "name_arabic": "سُورَةُ يُوسُفَ",
+    "name_english": "Yusuf",
+    "verse_count": 111,
+    "type": "Meccan"
+  },
+  {
+    "id": 13,
+    "name_arabic": "سُورَةُ الرَّعۡدِ",
+    "name_english": "Ar-Ra'd",
+    "verse_count": 43,
+    "type": "Medinan"
+  },
+  {
+    "id": 14,
+    "name_arabic": "سُورَةُ إِبۡرَاهِيمَ",
+    "name_english": "Ibrahim",
+    "verse_count": 52,
+    "type": "Meccan"
+  },
+  {
+    "id": 15,
+    "name_arabic": "سُورَةُ الحِجۡرِ",
+    "name_english": "Al-Hijr",
+    "verse_count": 99,
+    "type": "Meccan"
+  },
+  {
+    "id": 16,
+    "name_arabic": "سُورَةُ النَّحۡلِ",
+    "name_english": "An-Nahl",
+    "verse_count": 128,
+    "type": "Meccan"
+  },
+  {
+    "id": 17,
+    "name_arabic": "سُورَةُ الإِسۡرَاءِ",
+    "name_english": "Al-Israa",
+    "verse_count": 111,
+    "type": "Meccan"
+  },
+  {
+    "id": 18,
+    "name_arabic": "سُورَةُ الكَهۡفِ",
+    "name_english": "Al-Kahf",
+    "verse_count": 110,
+    "type": "Meccan"
+  },
+  {
+    "id": 19,
+    "name_arabic": "سُورَةُ مَرۡيَمَ",
+    "name_english": "Maryam",
+    "verse_count": 98,
+    "type": "Meccan"
+  },
+  {
+    "id": 20,
+    "name_arabic": "سُورَةُ طه",
+    "name_english": "Taa-Haa",
+    "verse_count": 135,
+    "type": "Meccan"
+  },
+  {
+    "id": 21,
+    "name_arabic": "سُورَةُ الأَنبِيَاءِ",
+    "name_english": "Al-Anbiyaa",
+    "verse_count": 112,
+    "type": "Meccan"
+  },
+  {
+    "id": 22,
+    "name_arabic": "سُورَةُ الحَجِّ",
+    "name_english": "Al-Hajj",
+    "verse_count": 78,
+    "type": "Medinan"
+  },
+  {
+    "id": 23,
+    "name_arabic": "سُورَةُ المُؤۡمِنُونَ",
+    "name_english": "Al-Muminoon",
+    "verse_count": 118,
+    "type": "Meccan"
+  },
+  {
+    "id": 24,
+    "name_arabic": "سُورَةُ النُّورِ",
+    "name_english": "An-Noor",
+    "verse_count": 64,
+    "type": "Medinan"
+  },
+  {
+    "id": 25,
+    "name_arabic": "سُورَةُ الفُرۡقَانِ",
+    "name_english": "Al-Furqaan",
+    "verse_count": 77,
+    "type": "Meccan"
+  },
+  {
+    "id": 26,
+    "name_arabic": "سُورَةُ الشُّعَرَاءِ",
+    "name_english": "Ash-Shu'araa",
+    "verse_count": 227,
+    "type": "Meccan"
+  },
+  {
+    "id": 27,
+    "name_arabic": "سُورَةُ النَّمۡلِ",
+    "name_english": "An-Naml",
+    "verse_count": 93,
+    "type": "Meccan"
+  },
+  {
+    "id": 28,
+    "name_arabic": "سُورَةُ القَصَصِ",
+    "name_english": "Al-Qasas",
+    "verse_count": 88,
+    "type": "Meccan"
+  },
+  {
+    "id": 29,
+    "name_arabic": "سُورَةُ العَنكَبُوتِ",
+    "name_english": "Al-Ankaboot",
+    "verse_count": 69,
+    "type": "Meccan"
+  },
+  {
+    "id": 30,
+    "name_arabic": "سُورَةُ الرُّومِ",
+    "name_english": "Ar-Room",
+    "verse_count": 60,
+    "type": "Meccan"
+  },
+  {
+    "id": 31,
+    "name_arabic": "سُورَةُ لُقۡمَانَ",
+    "name_english": "Luqman",
+    "verse_count": 34,
+    "type": "Meccan"
+  },
+  {
+    "id": 32,
+    "name_arabic": "سُورَةُ السَّجۡدَةِ",
+    "name_english": "As-Sajda",
+    "verse_count": 30,
+    "type": "Meccan"
+  },
+  {
+    "id": 33,
+    "name_arabic": "سُورَةُ الأَحۡزَابِ",
+    "name_english": "Al-Ahzaab",
+    "verse_count": 73,
+    "type": "Medinan"
+  },
+  {
+    "id": 34,
+    "name_arabic": "سُورَةُ سَبَإٍ",
+    "name_english": "Saba",
+    "verse_count": 54,
+    "type": "Meccan"
+  },
+  {
+    "id": 35,
+    "name_arabic": "سُورَةُ فَاطِرٍ",
+    "name_english": "Faatir",
+    "verse_count": 45,
+    "type": "Meccan"
+  },
+  {
+    "id": 36,
+    "name_arabic": "سُورَةُ يسٓ",
+    "name_english": "Yaseen",
+    "verse_count": 83,
+    "type": "Meccan"
+  },
+  {
+    "id": 37,
+    "name_arabic": "سُورَةُ الصَّافَّاتِ",
+    "name_english": "As-Saaffaat",
+    "verse_count": 182,
+    "type": "Meccan"
+  },
+  {
+    "id": 38,
+    "name_arabic": "سُورَةُ صٓ",
+    "name_english": "Saad",
+    "verse_count": 88,
+    "type": "Meccan"
+  },
+  {
+    "id": 39,
+    "name_arabic": "سُورَةُ الزُّمَرِ",
+    "name_english": "Az-Zumar",
+    "verse_count": 75,
+    "type": "Meccan"
+  },
+  {
+    "id": 40,
+    "name_arabic": "سُورَةُ غَافِرٍ",
+    "name_english": "Ghafir",
+    "verse_count": 85,
+    "type": "Meccan"
+  },
+  {
+    "id": 41,
+    "name_arabic": "سُورَةُ فُصِّلَتۡ",
+    "name_english": "Fussilat",
+    "verse_count": 54,
+    "type": "Meccan"
+  },
+  {
+    "id": 42,
+    "name_arabic": "سُورَةُ الشُّورَىٰ",
+    "name_english": "Ash-Shura",
+    "verse_count": 53,
+    "type": "Meccan"
+  },
+  {
+    "id": 43,
+    "name_arabic": "سُورَةُ الزُّخۡرُفِ",
+    "name_english": "Az-Zukhruf",
+    "verse_count": 89,
+    "type": "Meccan"
+  },
+  {
+    "id": 44,
+    "name_arabic": "سُورَةُ الدُّخَانِ",
+    "name_english": "Ad-Dukhaan",
+    "verse_count": 59,
+    "type": "Meccan"
+  },
+  {
+    "id": 45,
+    "name_arabic": "سُورَةُ الجَاثِيَةِ",
+    "name_english": "Al-Jaathiya",
+    "verse_count": 37,
+    "type": "Meccan"
+  },
+  {
+    "id": 46,
+    "name_arabic": "سُورَةُ الأَحۡقَافِ",
+    "name_english": "Al-Ahqaf",
+    "verse_count": 35,
+    "type": "Meccan"
+  },
+  {
+    "id": 47,
+    "name_arabic": "سُورَةُ مُحَمَّدٍ",
+    "name_english": "Muhammad",
+    "verse_count": 38,
+    "type": "Medinan"
+  },
+  {
+    "id": 48,
+    "name_arabic": "سُورَةُ الفَتۡحِ",
+    "name_english": "Al-Fath",
+    "verse_count": 29,
+    "type": "Medinan"
+  },
+  {
+    "id": 49,
+    "name_arabic": "سُورَةُ الحُجُرَاتِ",
+    "name_english": "Al-Hujuraat",
+    "verse_count": 18,
+    "type": "Medinan"
+  },
+  {
+    "id": 50,
+    "name_arabic": "سُورَةُ قٓ",
+    "name_english": "Qaaf",
+    "verse_count": 45,
+    "type": "Meccan"
+  },
+  {
+    "id": 51,
+    "name_arabic": "سُورَةُ الذَّارِيَاتِ",
+    "name_english": "Adh-Dhaariyat",
+    "verse_count": 60,
+    "type": "Meccan"
+  },
+  {
+    "id": 52,
+    "name_arabic": "سُورَةُ الطُّورِ",
+    "name_english": "At-Tur",
+    "verse_count": 49,
+    "type": "Meccan"
+  },
+  {
+    "id": 53,
+    "name_arabic": "سُورَةُ النَّجۡمِ",
+    "name_english": "An-Najm",
+    "verse_count": 62,
+    "type": "Meccan"
+  },
+  {
+    "id": 54,
+    "name_arabic": "سُورَةُ القَمَرِ",
+    "name_english": "Al-Qamar",
+    "verse_count": 55,
+    "type": "Meccan"
+  },
+  {
+    "id": 55,
+    "name_arabic": "سُورَةُ الرَّحۡمَٰن",
+    "name_english": "Ar-Rahmaan",
+    "verse_count": 78,
+    "type": "Medinan"
+  },
+  {
+    "id": 56,
+    "name_arabic": "سُورَةُ الوَاقِعَةِ",
+    "name_english": "Al-Waaqia",
+    "verse_count": 96,
+    "type": "Meccan"
+  },
+  {
+    "id": 57,
+    "name_arabic": "سُورَةُ الحَدِيدِ",
+    "name_english": "Al-Hadid",
+    "verse_count": 29,
+    "type": "Medinan"
+  },
+  {
+    "id": 58,
+    "name_arabic": "سُورَةُ المُجَادلَةِ",
+    "name_english": "Al-Mujaadila",
+    "verse_count": 22,
+    "type": "Medinan"
+  },
+  {
+    "id": 59,
+    "name_arabic": "سُورَةُ الحَشۡرِ",
+    "name_english": "Al-Hashr",
+    "verse_count": 24,
+    "type": "Medinan"
+  },
+  {
+    "id": 60,
+    "name_arabic": "سُورَةُ المُمۡتَحنَةِ",
+    "name_english": "Al-Mumtahana",
+    "verse_count": 13,
+    "type": "Medinan"
+  },
+  {
+    "id": 61,
+    "name_arabic": "سُورَةُ الصَّفِّ",
+    "name_english": "As-Saff",
+    "verse_count": 14,
+    "type": "Medinan"
+  },
+  {
+    "id": 62,
+    "name_arabic": "سُورَةُ الجُمُعَةِ",
+    "name_english": "Al-Jumu'a",
+    "verse_count": 11,
+    "type": "Medinan"
+  },
+  {
+    "id": 63,
+    "name_arabic": "سُورَةُ المُنَافِقُونَ",
+    "name_english": "Al-Munaafiqoon",
+    "verse_count": 11,
+    "type": "Medinan"
+  },
+  {
+    "id": 64,
+    "name_arabic": "سُورَةُ التَّغَابُنِ",
+    "name_english": "At-Taghaabun",
+    "verse_count": 18,
+    "type": "Medinan"
+  },
+  {
+    "id": 65,
+    "name_arabic": "سُورَةُ الطَّلَاقِ",
+    "name_english": "At-Talaaq",
+    "verse_count": 12,
+    "type": "Medinan"
+  },
+  {
+    "id": 66,
+    "name_arabic": "سُورَةُ التَّحۡرِيمِ",
+    "name_english": "At-Tahrim",
+    "verse_count": 12,
+    "type": "Medinan"
+  },
+  {
+    "id": 67,
+    "name_arabic": "سُورَةُ المُلۡكِ",
+    "name_english": "Al-Mulk",
+    "verse_count": 30,
+    "type": "Meccan"
+  },
+  {
+    "id": 68,
+    "name_arabic": "سُورَةُ القَلَمِ",
+    "name_english": "Al-Qalam",
+    "verse_count": 52,
+    "type": "Meccan"
+  },
+  {
+    "id": 69,
+    "name_arabic": "سُورَةُ الحَاقَّةِ",
+    "name_english": "Al-Haaqqa",
+    "verse_count": 52,
+    "type": "Meccan"
+  },
+  {
+    "id": 70,
+    "name_arabic": "سُورَةُ المَعَارِجِ",
+    "name_english": "Al-Ma'aarij",
+    "verse_count": 44,
+    "type": "Meccan"
+  },
+  {
+    "id": 71,
+    "name_arabic": "سُورَةُ نُوحٍ",
+    "name_english": "Nooh",
+    "verse_count": 28,
+    "type": "Meccan"
+  },
+  {
+    "id": 72,
+    "name_arabic": "سُورَةُ الجِنِّ",
+    "name_english": "Al-Jinn",
+    "verse_count": 28,
+    "type": "Meccan"
+  },
+  {
+    "id": 73,
+    "name_arabic": "سُورَةُ المُزَّمِّلِ",
+    "name_english": "Al-Muzzammil",
+    "verse_count": 20,
+    "type": "Meccan"
+  },
+  {
+    "id": 74,
+    "name_arabic": "سُورَةُ المُدَّثِّرِ",
+    "name_english": "Al-Muddaththir",
+    "verse_count": 56,
+    "type": "Meccan"
+  },
+  {
+    "id": 75,
+    "name_arabic": "سُورَةُ القِيَامَةِ",
+    "name_english": "Al-Qiyaama",
+    "verse_count": 40,
+    "type": "Meccan"
+  },
+  {
+    "id": 76,
+    "name_arabic": "سُورَةُ الإِنسَانِ",
+    "name_english": "Al-Insaan",
+    "verse_count": 31,
+    "type": "Medinan"
+  },
+  {
+    "id": 77,
+    "name_arabic": "سُورَةُ المُرۡسَلَاتِ",
+    "name_english": "Al-Mursalaat",
+    "verse_count": 50,
+    "type": "Meccan"
+  },
+  {
+    "id": 78,
+    "name_arabic": "سُورَةُ النَّبَإِ",
+    "name_english": "An-Naba",
+    "verse_count": 40,
+    "type": "Meccan"
+  },
+  {
+    "id": 79,
+    "name_arabic": "سُورَةُ النَّازِعَاتِ",
+    "name_english": "An-Naazi'aat",
+    "verse_count": 46,
+    "type": "Meccan"
+  },
+  {
+    "id": 80,
+    "name_arabic": "سُورَةُ عَبَسَ",
+    "name_english": "Abasa",
+    "verse_count": 42,
+    "type": "Meccan"
+  },
+  {
+    "id": 81,
+    "name_arabic": "سُورَةُ التَّكۡوِيرِ",
+    "name_english": "At-Takwir",
+    "verse_count": 29,
+    "type": "Meccan"
+  },
+  {
+    "id": 82,
+    "name_arabic": "سُورَةُ الانفِطَارِ",
+    "name_english": "Al-Infitaar",
+    "verse_count": 19,
+    "type": "Meccan"
+  },
+  {
+    "id": 83,
+    "name_arabic": "سُورَةُ المُطَفِّفِينَ",
+    "name_english": "Al-Mutaffifin",
+    "verse_count": 36,
+    "type": "Meccan"
+  },
+  {
+    "id": 84,
+    "name_arabic": "سُورَةُ الانشِقَاقِ",
+    "name_english": "Al-Inshiqaaq",
+    "verse_count": 25,
+    "type": "Meccan"
+  },
+  {
+    "id": 85,
+    "name_arabic": "سُورَةُ البُرُوجِ",
+    "name_english": "Al-Burooj",
+    "verse_count": 22,
+    "type": "Meccan"
+  },
+  {
+    "id": 86,
+    "name_arabic": "سُورَةُ الطَّارِقِ",
+    "name_english": "At-Taariq",
+    "verse_count": 17,
+    "type": "Meccan"
+  },
+  {
+    "id": 87,
+    "name_arabic": "سُورَةُ الأَعۡلَىٰ",
+    "name_english": "Al-A'laa",
+    "verse_count": 19,
+    "type": "Meccan"
+  },
+  {
+    "id": 88,
+    "name_arabic": "سُورَةُ الغَاشِيَةِ",
+    "name_english": "Al-Ghaashiya",
+    "verse_count": 26,
+    "type": "Meccan"
+  },
+  {
+    "id": 89,
+    "name_arabic": "سُورَةُ الفَجۡرِ",
+    "name_english": "Al-Fajr",
+    "verse_count": 30,
+    "type": "Meccan"
+  },
+  {
+    "id": 90,
+    "name_arabic": "سُورَةُ البَلَدِ",
+    "name_english": "Al-Balad",
+    "verse_count": 20,
+    "type": "Meccan"
+  },
+  {
+    "id": 91,
+    "name_arabic": "سُورَةُ الشَّمۡسِ",
+    "name_english": "Ash-Shams",
+    "verse_count": 15,
+    "type": "Meccan"
+  },
+  {
+    "id": 92,
+    "name_arabic": "سُورَةُ اللَّيۡلِ",
+    "name_english": "Al-Lail",
+    "verse_count": 21,
+    "type": "Meccan"
+  },
+  {
+    "id": 93,
+    "name_arabic": "سُورَةُ الضُّحَىٰ",
+    "name_english": "Ad-Dhuhaa",
+    "verse_count": 11,
+    "type": "Meccan"
+  },
+  {
+    "id": 94,
+    "name_arabic": "سُورَةُ الشَّرۡحِ",
+    "name_english": "Ash-Sharh",
+    "verse_count": 8,
+    "type": "Meccan"
+  },
+  {
+    "id": 95,
+    "name_arabic": "سُورَةُ التِّينِ",
+    "name_english": "At-Tin",
+    "verse_count": 8,
+    "type": "Meccan"
+  },
+  {
+    "id": 96,
+    "name_arabic": "سُورَةُ العَلَقِ",
+    "name_english": "Al-Alaq",
+    "verse_count": 19,
+    "type": "Meccan"
+  },
+  {
+    "id": 97,
+    "name_arabic": "سُورَةُ القَدۡرِ",
+    "name_english": "Al-Qadr",
+    "verse_count": 5,
+    "type": "Meccan"
+  },
+  {
+    "id": 98,
+    "name_arabic": "سُورَةُ البَيِّنَةِ",
+    "name_english": "Al-Bayyina",
+    "verse_count": 8,
+    "type": "Medinan"
+  },
+  {
+    "id": 99,
+    "name_arabic": "سُورَةُ الزَّلۡزَلَةِ",
+    "name_english": "Az-Zalzala",
+    "verse_count": 8,
+    "type": "Medinan"
+  },
+  {
+    "id": 100,
+    "name_arabic": "سُورَةُ العَادِيَاتِ",
+    "name_english": "Al-Aadiyaat",
+    "verse_count": 11,
+    "type": "Meccan"
+  },
+  {
+    "id": 101,
+    "name_arabic": "سُورَةُ القَارِعَةِ",
+    "name_english": "Al-Qaari'a",
+    "verse_count": 11,
+    "type": "Meccan"
+  },
+  {
+    "id": 102,
+    "name_arabic": "سُورَةُ التَّكَاثُرِ",
+    "name_english": "At-Takaathur",
+    "verse_count": 8,
+    "type": "Meccan"
+  },
+  {
+    "id": 103,
+    "name_arabic": "سُورَةُ العَصۡرِ",
+    "name_english": "Al-Asr",
+    "verse_count": 3,
+    "type": "Meccan"
+  },
+  {
+    "id": 104,
+    "name_arabic": "سُورَةُ الهُمَزَةِ",
+    "name_english": "Al-Humaza",
+    "verse_count": 9,
+    "type": "Meccan"
+  },
+  {
+    "id": 105,
+    "name_arabic": "سُورَةُ الفِيلِ",
+    "name_english": "Al-Fil",
+    "verse_count": 5,
+    "type": "Meccan"
+  },
+  {
+    "id": 106,
+    "name_arabic": "سُورَةُ قُرَيۡشٍ",
+    "name_english": "Quraish",
+    "verse_count": 4,
+    "type": "Meccan"
+  },
+  {
+    "id": 107,
+    "name_arabic": "سُورَةُ المَاعُونِ",
+    "name_english": "Al-Maa'un",
+    "verse_count": 7,
+    "type": "Meccan"
+  },
+  {
+    "id": 108,
+    "name_arabic": "سُورَةُ الكَوۡثَرِ",
+    "name_english": "Al-Kawthar",
+    "verse_count": 3,
+    "type": "Meccan"
+  },
+  {
+    "id": 109,
+    "name_arabic": "سُورَةُ الكَافِرُونَ",
+    "name_english": "Al-Kaafiroon",
+    "verse_count": 6,
+    "type": "Meccan"
+  },
+  {
+    "id": 110,
+    "name_arabic": "سُورَةُ النَّصۡرِ",
+    "name_english": "An-Nasr",
+    "verse_count": 3,
+    "type": "Medinan"
+  },
+  {
+    "id": 111,
+    "name_arabic": "سُورَةُ المَسَدِ",
+    "name_english": "Al-Masad",
+    "verse_count": 5,
+    "type": "Meccan"
+  },
+  {
+    "id": 112,
+    "name_arabic": "سُورَةُ الإِخۡلَاصِ",
+    "name_english": "Al-Ikhlaas",
+    "verse_count": 4,
+    "type": "Meccan"
+  },
+  {
+    "id": 113,
+    "name_arabic": "سُورَةُ الفَلَقِ",
+    "name_english": "Al-Falaq",
+    "verse_count": 5,
+    "type": "Meccan"
+  },
+  {
+    "id": 114,
+    "name_arabic": "سُورَةُ النَّاسِ",
+    "name_english": "An-Naas",
+    "verse_count": 6,
+    "type": "Meccan"
+  }
 ]
