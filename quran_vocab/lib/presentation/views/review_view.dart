@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/db/quran_dao.dart';
 import '../../data/models/user_progress.dart';
-import '../state/quran_providers.dart';
 import '../state/srs_providers.dart';
 
 class ReviewView extends ConsumerWidget {
@@ -27,7 +25,7 @@ class ReviewView extends ConsumerWidget {
               return const Center(child: Text('No reviews due right now.'));
             }
             if (progress == null) {
-              return const Center(child: Text('Session complete.'));
+              return const Center(child: Text('Session complete!'));
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,14 +42,32 @@ class ReviewView extends ConsumerWidget {
                       data: (root) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            root?.rootText ?? 'Root ${progress.rootId}',
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            root?.meaningShort ?? 'Meaning not loaded yet.',
-                          ),
+                          if (root != null) ...[
+                            Text(
+                              root.rootText,
+                              textDirection: TextDirection.rtl,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall
+                                  ?.copyWith(fontFamily: 'Amiri'),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              root.meaningShort,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              root.meaningLong,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'Appears ${root.frequencyCount} times in Quran',
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
+                          ] else
+                            Text('Root ${progress.rootId}'),
                         ],
                       ),
                       loading: () => const LinearProgressIndicator(),
@@ -63,21 +79,26 @@ class ReviewView extends ConsumerWidget {
                 const SizedBox(height: 20),
                 Wrap(
                   spacing: 12,
+                  runSpacing: 12,
                   children: [
                     _ReviewButton(
                       label: 'Again',
+                      color: Colors.red,
                       onTap: () => _handleReview(ref, progress, 1),
                     ),
                     _ReviewButton(
                       label: 'Hard',
+                      color: Colors.orange,
                       onTap: () => _handleReview(ref, progress, 2),
                     ),
                     _ReviewButton(
                       label: 'Good',
+                      color: Colors.green,
                       onTap: () => _handleReview(ref, progress, 3),
                     ),
                     _ReviewButton(
                       label: 'Easy',
+                      color: Colors.blue,
                       onTap: () => _handleReview(ref, progress, 4),
                     ),
                   ],
@@ -92,11 +113,11 @@ class ReviewView extends ConsumerWidget {
     );
   }
 
-  Future<void> _handleReview(
+  void _handleReview(
     WidgetRef ref,
     UserProgress progress,
     int rating,
-  ) async {
+  ) {
     final fsrs = ref.read(fsrsProvider);
     final now = DateTime.now();
     final elapsedDays = now.difference(progress.nextReviewDate).inDays;
@@ -114,8 +135,9 @@ class ReviewView extends ConsumerWidget {
       difficulty: review.difficulty,
       nextReviewDate: nextDate,
     );
-    final db = await ref.read(databaseProvider.future);
-    await QuranDao(db).upsertUserProgress(updated);
+
+    // Update in-memory storage
+    ref.read(userProgressNotifierProvider.notifier).upsert(updated);
     ref.read(currentSrsIndexProvider.notifier).state++;
     ref.invalidate(dueProgressProvider);
     ref.invalidate(currentRootProvider);
@@ -123,15 +145,24 @@ class ReviewView extends ConsumerWidget {
 }
 
 class _ReviewButton extends StatelessWidget {
-  const _ReviewButton({required this.label, required this.onTap});
+  const _ReviewButton({
+    required this.label,
+    required this.onTap,
+    required this.color,
+  });
 
   final String label;
   final VoidCallback onTap;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+      ),
       child: Text(label),
     );
   }

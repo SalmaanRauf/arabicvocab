@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/db/quran_dao.dart';
 import '../../services/audio/audio_manager.dart';
 import '../../services/audio/segment.dart';
 import 'quran_providers.dart';
@@ -18,8 +17,9 @@ final audioSegmentsProvider = FutureProvider<List<Segment>>((ref) async {
   if (surahId == null) {
     return const <Segment>[];
   }
-  final db = await ref.watch(databaseProvider.future);
-  return QuranDao(db).fetchSegmentsForSurah(surahId);
+  // Audio segments will be loaded from assets in a future update.
+  // For now, return empty list - audio sync requires alignment data.
+  return const <Segment>[];
 });
 
 final audioOffsetMsProvider = StateProvider<int>((ref) => 0);

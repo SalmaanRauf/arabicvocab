@@ -23,6 +23,16 @@ class Root {
     );
   }
 
+  factory Root.fromJson(Map<String, dynamic> json) {
+    return Root(
+      id: json['id'] as int,
+      rootText: json['root_text'] as String? ?? '',
+      frequencyCount: json['frequency_count'] as int? ?? 0,
+      meaningShort: json['meaning_short'] as String? ?? '',
+      meaningLong: json['meaning_long'] as String? ?? '',
+    );
+  }
+
   Map<String, Object?> toMap() {
     return {
       'id': id,

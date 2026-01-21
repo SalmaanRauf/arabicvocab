@@ -5,6 +5,7 @@ import '../../data/models/ayah.dart';
 import '../../data/models/word.dart';
 import '../state/quran_providers.dart';
 import 'word_chip.dart';
+import 'word_detail_popup.dart';
 
 class AyahWidget extends ConsumerWidget {
   const AyahWidget({
@@ -67,6 +68,13 @@ class _AyahWords extends StatelessWidget {
   final List<Word> words;
   final int? highlightWordId;
 
+  void _showWordDetail(BuildContext context, Word word) {
+    showDialog(
+      context: context,
+      builder: (_) => WordDetailPopup(word: word),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (words.isEmpty) {
@@ -83,7 +91,7 @@ class _AyahWords extends StatelessWidget {
             WordChip(
               word: word,
               isHighlighted: highlightWordId == word.id,
-              onTap: () => debugPrint('Tapped word ${word.id}'),
+              onTap: () => _showWordDetail(context, word),
             ),
         ],
       ),

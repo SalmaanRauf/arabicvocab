@@ -23,6 +23,16 @@ class Surah {
     );
   }
 
+  factory Surah.fromJson(Map<String, dynamic> json) {
+    return Surah(
+      id: json['id'] as int,
+      nameArabic: json['name_arabic'] as String? ?? '',
+      nameEnglish: json['name_english'] as String? ?? '',
+      verseCount: json['verse_count'] as int? ?? 0,
+      type: json['type'] as String? ?? '',
+    );
+  }
+
   Map<String, Object?> toMap() {
     return {
       'id': id,
