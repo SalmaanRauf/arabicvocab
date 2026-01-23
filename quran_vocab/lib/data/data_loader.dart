@@ -26,7 +26,7 @@ class DataLoader {
 
     final surahsJson = await rootBundle.loadString('assets/data/surahs.json');
     final ayahsJson = await rootBundle.loadString('assets/data/ayahs_full.json');
-    final wordsJson = await rootBundle.loadString('assets/data/words_sample.json');
+    final wordsJson = await rootBundle.loadString('assets/data/words_full.json');
     final rootsJson = await rootBundle.loadString('assets/data/roots.json');
 
     final surahsList = (jsonDecode(surahsJson) as List).cast<Map<String, dynamic>>();
