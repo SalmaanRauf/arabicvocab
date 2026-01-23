@@ -75,6 +75,7 @@ flutter:
     - assets/data/surahs.json
     - assets/data/ayahs_full.json
     - assets/data/words_sample.json
+    - assets/data/words_full.json
     - assets/data/roots.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
