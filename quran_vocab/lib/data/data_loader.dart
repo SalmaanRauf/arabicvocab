@@ -97,16 +97,19 @@ class DataLoader {
       if (explicitWords.containsKey(key)) {
         _wordsByAyahId![ayah.id] = explicitWords[key]!;
       } else {
-        // Generate basic words by splitting Arabic text
-        final arabicWords = ayah.textUthmani.split(' ').where((w) => w.isNotEmpty).toList();
+        // Generate basic words by splitting Arabic text (both Uthmani and IndoPak)
+        final uthmaniWords = ayah.textUthmani.split(' ').where((w) => w.isNotEmpty).toList();
+        final indopakWords = ayah.textIndopak.split(' ').where((w) => w.isNotEmpty).toList();
         final generatedWords = <Word>[];
-        for (int i = 0; i < arabicWords.length; i++) {
+        for (int i = 0; i < uthmaniWords.length; i++) {
+          // Use corresponding IndoPak word if available, otherwise fallback to Uthmani
+          final indopakWord = i < indopakWords.length ? indopakWords[i] : uthmaniWords[i];
           final word = Word(
             id: wordId++,
             ayahId: ayah.id,
             position: i + 1,
-            textUthmani: arabicWords[i],
-            textIndopak: arabicWords[i],
+            textUthmani: uthmaniWords[i],
+            textIndopak: indopakWord,
             translationEn: '', // No translation for auto-split words
             transliteration: '',
             rootId: null,
