@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/models/surah.dart';
 import '../../data/models/word.dart';
+import '../routes/app_router.dart';
 import '../state/audio_providers.dart';
 import '../state/quran_providers.dart';
 import '../widgets/ayah_widget.dart';
@@ -16,12 +18,12 @@ class ReaderView extends ConsumerStatefulWidget {
 
 class _ReaderViewState extends ConsumerState<ReaderView> {
   final TextEditingController _searchController = TextEditingController();
-  final TextEditingController _audioUrlController = TextEditingController();
+  int _currentAyahForAudio = 1;
+  bool _isAudioLoading = false;
 
   @override
   void dispose() {
     _searchController.dispose();
-    _audioUrlController.dispose();
     super.dispose();
   }
 
@@ -35,6 +37,10 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.go(AppRouter.homePath),
+        ),
         title: const Text('Reader'),
       ),
       body: ListView(
@@ -132,64 +138,104 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
   }
 
   Widget _buildAudioControls() {
-    return Consumer(
-      builder: (context, ref, _) {
-        final manager = ref.watch(audioManagerProvider);
-        final segmentsAsync = ref.watch(audioSegmentsProvider);
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Audio',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 8),
-                TextField(
-                  controller: _audioUrlController,
-                  decoration: const InputDecoration(
-                    hintText: 'Paste MP3 URL',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                segmentsAsync.when(
-                  data: (segments) => Wrap(
-                    spacing: 12,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          final url = _audioUrlController.text.trim();
-                          if (url.isEmpty) {
-                            return;
+    final selectedSurahId = ref.watch(selectedSurahIdProvider) ?? 1;
+    final ayahsAsync = ref.watch(ayahsProvider);
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Audio (Mishary al-Afasy)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 12),
+            ayahsAsync.when(
+              data: (ayahs) {
+                if (ayahs.isEmpty) return const SizedBox.shrink();
+                // Ensure current ayah is valid for this surah
+                final maxAyah = ayahs.length;
+                if (_currentAyahForAudio > maxAyah) {
+                  _currentAyahForAudio = 1;
+                }
+                return Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField<int>(
+                        value: _currentAyahForAudio,
+                        decoration: const InputDecoration(
+                          labelText: 'Ayah',
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        ),
+                        items: List.generate(
+                          maxAyah,
+                          (i) => DropdownMenuItem(
+                            value: i + 1,
+                            child: Text('Ayah ${i + 1}'),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              _currentAyahForAudio = value;
+                            });
                           }
-                          await manager.setSource(
-                            url: url,
-                            segments: segments,
-                          );
                         },
-                        child: const Text('Load audio'),
                       ),
-                      OutlinedButton(
-                        onPressed: manager.play,
-                        child: const Text('Play'),
-                      ),
-                      OutlinedButton(
-                        onPressed: manager.pause,
-                        child: const Text('Pause'),
-                      ),
-                    ],
-                  ),
-                  loading: () => const LinearProgressIndicator(),
-                  error: (error, _) => Text('Audio segments error: $error'),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton.icon(
+                      icon: _isAudioLoading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.download),
+                      label: const Text('Load'),
+                      onPressed: _isAudioLoading
+                          ? null
+                          : () async {
+                              setState(() => _isAudioLoading = true);
+                              try {
+                                final manager = ref.read(audioManagerProvider);
+                                await manager.loadAyahAudio(
+                                  surahId: selectedSurahId,
+                                  ayahNumber: _currentAyahForAudio,
+                                );
+                              } finally {
+                                setState(() => _isAudioLoading = false);
+                              }
+                            },
+                    ),
+                  ],
+                );
+              },
+              loading: () => const LinearProgressIndicator(),
+              error: (e, _) => Text('Error: $e'),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text('Play'),
+                  onPressed: () => ref.read(audioManagerProvider).play(),
+                ),
+                const SizedBox(width: 8),
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.pause),
+                  label: const Text('Pause'),
+                  onPressed: () => ref.read(audioManagerProvider).pause(),
                 ),
               ],
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 
