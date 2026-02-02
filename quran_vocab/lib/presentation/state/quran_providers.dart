@@ -35,10 +35,22 @@ final ayahsProvider = FutureProvider<List<Ayah>>((ref) async {
   return loader.getAyahsForSurah(surahId);
 });
 
+final ayahsForSurahProvider =
+    FutureProvider.family<List<Ayah>, int>((ref, int surahId) async {
+  final loader = await ref.watch(dataLoaderProvider.future);
+  return loader.getAyahsForSurah(surahId);
+});
+
 final wordsForAyahProvider =
     FutureProvider.family<List<Word>, int>((ref, int ayahId) async {
   final loader = await ref.watch(dataLoaderProvider.future);
   return loader.getWordsForAyah(ayahId);
+});
+
+final wordsForSurahProvider =
+    FutureProvider.family<List<Word>, int>((ref, int surahId) async {
+  final loader = await ref.watch(dataLoaderProvider.future);
+  return loader.getWordsForSurah(surahId);
 });
 
 final rootByIdProvider =

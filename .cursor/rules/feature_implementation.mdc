@@ -1,0 +1,132 @@
+---
+description: Invoke with @implement-feature to plan and implement new features
+globs: []
+---
+
+<rule>
+name: feature_implementation_skill
+description: Structured workflow for implementing new features in Flutter
+
+# Feature Implementation Skill
+
+When invoked with `@implement-feature`, follow this comprehensive workflow.
+
+## Implementation Workflow
+
+### Phase 1: Planning
+
+#### Requirements Gathering
+- What is the user-facing functionality?
+- What data does it need?
+- What state changes are involved?
+- What UI components are needed?
+
+#### Technical Design
+- Which layers need changes? (data, domain, presentation)
+- New models or modifications?
+- New providers or state changes?
+- UI components to create/modify?
+
+### Phase 2: Implementation Order
+
+For Flutter with Riverpod, follow this order:
+
+1. **Models** (if new data structures needed)
+```dart
+// lib/data/models/new_feature.dart
+@freezed
+class NewFeature with _$NewFeature {
+  const factory NewFeature({
+    required String id,
+    required String name,
+  }) = _NewFeature;
+  
+  factory NewFeature.fromJson(Map<String, dynamic> json) =>
+      _$NewFeatureFromJson(json);
+}
+```
+
+2. **Repository** (data access)
+```dart
+// Add methods to existing repository or create new
+Future<List<NewFeature>> getNewFeatures();
+Future<void> saveNewFeature(NewFeature feature);
+```
+
+3. **Providers** (state management)
+```dart
+// lib/presentation/state/new_feature_providers.dart
+@riverpod
+Future<List<NewFeature>> newFeatures(NewFeaturesRef ref) async {
+  final repo = ref.watch(repositoryProvider);
+  return repo.getNewFeatures();
+}
+```
+
+4. **Widgets** (UI components)
+```dart
+// lib/presentation/widgets/new_feature_widget.dart
+class NewFeatureWidget extends ConsumerWidget {
+  // Implementation
+}
+```
+
+5. **Views** (screens)
+```dart
+// lib/presentation/views/new_feature_view.dart
+@RoutePage()
+class NewFeatureView extends ConsumerWidget {
+  // Implementation
+}
+```
+
+6. **Routes** (navigation)
+```dart
+// Update app_router.dart
+AutoRoute(page: NewFeatureRoute.page),
+```
+
+### Phase 3: Testing
+
+- Unit tests for models and logic
+- Widget tests for new components
+- Integration tests for the flow
+
+### Phase 4: Documentation
+
+- Update README if needed
+- Add code comments for complex logic
+- Document any new environment requirements
+
+## Output Template
+
+When implementing a feature, provide:
+
+```markdown
+## Feature: [Name]
+
+### Requirements
+- [Requirement 1]
+- [Requirement 2]
+
+### Implementation Plan
+1. [ ] Create/modify models
+2. [ ] Update repository
+3. [ ] Add providers
+4. [ ] Create widgets
+5. [ ] Build view
+6. [ ] Add routing
+7. [ ] Write tests
+
+### Files to Create/Modify
+- `lib/data/models/...`
+- `lib/presentation/...`
+
+### Dependencies
+- Any new packages needed
+
+### Estimated Complexity
+Simple / Medium / Complex
+```
+
+</rule>

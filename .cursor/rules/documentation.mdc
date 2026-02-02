@@ -1,0 +1,134 @@
+---
+description: Invoke with @document to generate documentation
+globs: []
+---
+
+<rule>
+name: documentation_skill
+description: Generate clear and useful documentation
+
+# Documentation Skill
+
+When invoked with `@document`, generate appropriate documentation.
+
+## Documentation Types
+
+### Code Documentation
+
+#### Class Documentation
+```dart
+/// A widget that displays an Arabic word with optional translation.
+/// 
+/// This widget handles RTL text direction automatically and supports
+/// tapping to show word details.
+/// 
+/// Example:
+/// ```dart
+/// WordChip(
+///   word: word,
+///   onTap: () => showDetails(word),
+/// )
+/// ```
+class WordChip extends StatelessWidget {
+```
+
+#### Method Documentation
+```dart
+/// Calculates the next review date based on FSRS algorithm.
+/// 
+/// [card] - The current card state with difficulty and stability.
+/// [rating] - User's rating: 1 (Again), 2 (Hard), 3 (Good), 4 (Easy).
+/// 
+/// Returns a [SchedulingInfo] with the updated card state and next review.
+/// 
+/// Throws [ArgumentError] if rating is not between 1 and 4.
+SchedulingInfo schedule(Card card, int rating) {
+```
+
+#### Provider Documentation
+```dart
+/// Provides the list of surahs with their metadata.
+/// 
+/// This is a cached provider that fetches data once from the repository.
+/// Use [ref.invalidate] to force a refresh.
+/// 
+/// See also:
+/// - [currentSurahProvider] for the selected surah
+/// - [ayahsProvider] for verses in a surah
+@riverpod
+Future<List<Surah>> surahs(SurahsRef ref) async {
+```
+
+### README Documentation
+
+Structure for project README:
+```markdown
+# Project Name
+
+Brief description of what the app does.
+
+## Features
+- Feature 1
+- Feature 2
+
+## Getting Started
+
+### Prerequisites
+- Flutter SDK
+- Dart SDK
+
+### Installation
+```bash
+git clone ...
+cd project
+flutter pub get
+```
+
+### Running
+```bash
+flutter run
+```
+
+## Architecture
+
+Brief overview of project structure.
+
+## Contributing
+
+Guidelines for contributors.
+```
+
+### API Documentation
+
+For repository methods:
+```dart
+/// Repository for accessing Quran data.
+/// 
+/// This class provides methods to fetch surahs, ayahs, words, and roots
+/// from the local SQLite database.
+/// 
+/// Usage:
+/// ```dart
+/// final repo = QuranRepository(database);
+/// final surahs = await repo.getSurahs();
+/// ```
+abstract class QuranRepository {
+  /// Returns all 114 surahs ordered by surah number.
+  Future<List<Surah>> getSurahs();
+  
+  /// Returns ayahs for the specified surah.
+  /// 
+  /// [surahNumber] must be between 1 and 114.
+  Future<List<Ayah>> getAyahsBySurah(int surahNumber);
+}
+```
+
+## Best Practices
+
+1. **Be concise** - Say what's necessary, no more
+2. **Use examples** - Show, don't just tell
+3. **Document why** - Explain reasoning, not just what
+4. **Keep updated** - Update docs with code changes
+5. **Use proper grammar** - Professional documentation
+
+</rule>

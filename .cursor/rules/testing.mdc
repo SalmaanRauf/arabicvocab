@@ -1,0 +1,122 @@
+---
+description: Invoke with @test-generator to create tests for Flutter code
+globs: []
+---
+
+<rule>
+name: test_generator_skill
+description: Generate comprehensive tests for Flutter/Dart code
+
+# Test Generator Skill
+
+When invoked with `@test-generator`, create appropriate tests for the specified code.
+
+## Test Types
+
+### Unit Tests
+For pure Dart logic, services, and utilities:
+- FSRS algorithm calculations
+- Data transformations
+- Repository methods
+- Model serialization
+
+### Widget Tests
+For UI components:
+- Widget rendering
+- User interactions
+- State changes
+- Navigation
+
+### Integration Tests
+For end-to-end flows:
+- Complete user journeys
+- Database operations
+- API interactions
+
+## Test Structure
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Mock classes
+class MockRepository extends Mock implements QuranRepository {}
+
+void main() {
+  group('FeatureName', () {
+    late MockRepository mockRepository;
+    
+    setUp(() {
+      mockRepository = MockRepository();
+    });
+    
+    tearDown(() {
+      // Cleanup
+    });
+    
+    test('should do something when condition', () {
+      // Arrange
+      final input = 'test';
+      
+      // Act
+      final result = functionUnderTest(input);
+      
+      // Assert
+      expect(result, equals(expectedValue));
+    });
+    
+    test('should handle error when invalid input', () {
+      // Test error cases
+      expect(() => functionUnderTest(null), throwsA(isA<ArgumentError>()));
+    });
+  });
+}
+```
+
+## Widget Test Template
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+void main() {
+  testWidgets('WidgetName displays correctly', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          // Provider overrides for testing
+        ],
+        child: const MaterialApp(
+          home: WidgetUnderTest(),
+        ),
+      ),
+    );
+    
+    // Verify initial state
+    expect(find.text('Expected Text'), findsOneWidget);
+    
+    // Interact
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pumpAndSettle();
+    
+    // Verify result
+    expect(find.text('Updated Text'), findsOneWidget);
+  });
+}
+```
+
+## Test Coverage Goals
+
+- Business logic: 80%+ coverage
+- Models: 100% serialization tests
+- Widgets: Key interactions tested
+- Error paths: All error states tested
+
+## Naming Conventions
+
+- Test files: `*_test.dart`
+- Test groups: Feature or class name
+- Test names: `should [expected behavior] when [condition]`
+
+</rule>

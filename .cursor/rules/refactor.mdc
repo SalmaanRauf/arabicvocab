@@ -1,0 +1,121 @@
+---
+description: Invoke with @refactor to safely refactor code with best practices
+globs: []
+---
+
+<rule>
+name: refactor_skill
+description: Safe and systematic code refactoring workflow
+
+# Refactor Skill
+
+When invoked with `@refactor`, follow this systematic approach to safely improve code.
+
+## Refactoring Process
+
+### 1. Analysis Phase
+Before making changes:
+- Identify the code smell or issue
+- Understand all usages and dependencies
+- Check for existing tests
+- Document current behavior
+
+### 2. Common Refactoring Patterns
+
+#### Extract Method/Function
+When a method is too long or does multiple things:
+```dart
+// Before
+void processData() {
+  // validation logic
+  // transformation logic
+  // storage logic
+}
+
+// After
+void processData() {
+  _validate();
+  _transform();
+  _store();
+}
+```
+
+#### Extract Widget
+When a widget is too complex:
+```dart
+// Extract reusable components
+class _HeaderSection extends StatelessWidget { ... }
+class _ContentSection extends StatelessWidget { ... }
+```
+
+#### Introduce Parameter Object
+When too many parameters:
+```dart
+// Before
+void createWord(String arabic, String english, int surahId, int ayahId, int position) {}
+
+// After
+void createWord(WordCreationParams params) {}
+```
+
+#### Replace Conditional with Polymorphism
+When switch/if chains grow:
+```dart
+// Use sealed classes and pattern matching
+sealed class ReviewResult {}
+class Correct extends ReviewResult {}
+class Incorrect extends ReviewResult {}
+```
+
+### 3. Flutter-Specific Refactorings
+
+#### Widget Decomposition
+- Extract stateless parts into const widgets
+- Separate business logic from UI
+- Use hooks for reusable stateful logic
+
+#### State Management Cleanup
+- Consolidate related providers
+- Remove unused providers
+- Proper provider scoping
+
+#### Performance Refactoring
+- Add const where possible
+- Extract rebuilding widgets
+- Implement shouldRebuild checks
+
+### 4. Safety Checklist
+
+Before committing refactored code:
+- [ ] All existing tests pass
+- [ ] New tests cover refactored code
+- [ ] No behavior changes (unless intended)
+- [ ] Code review requested
+- [ ] Performance not degraded
+
+### 5. Output Format
+
+When suggesting refactoring:
+
+```markdown
+## Refactoring Proposal
+
+### Current Issue
+[Description of the code smell or problem]
+
+### Proposed Change
+[Clear explanation of the refactoring]
+
+### Before
+[Code snippet]
+
+### After
+[Refactored code snippet]
+
+### Impact
+- Files affected: [list]
+- Risk level: Low/Medium/High
+- Testing needed: [description]
+```
+
+</rule>

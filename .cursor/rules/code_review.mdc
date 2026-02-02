@@ -1,0 +1,86 @@
+---
+description: Invoke with @code-review to perform thorough code reviews
+globs: []
+---
+
+<rule>
+name: code_review_skill
+description: Comprehensive code review workflow for Flutter/Dart projects
+
+# Code Review Skill
+
+When invoked with `@code-review`, perform a thorough code review following this structured process.
+
+## Review Process
+
+### 1. Understand the Context
+- Identify the files being reviewed
+- Understand the purpose of the changes
+- Check if changes align with project architecture
+
+### 2. Code Quality Checks
+
+#### Correctness
+- [ ] Logic is correct and handles edge cases
+- [ ] Error handling is comprehensive
+- [ ] Null safety is properly implemented
+- [ ] Async/await patterns are correct
+
+#### Performance
+- [ ] No unnecessary widget rebuilds
+- [ ] Proper use of const constructors
+- [ ] Efficient data structures and algorithms
+- [ ] No memory leaks (dispose patterns)
+
+#### Security
+- [ ] No hardcoded secrets or API keys
+- [ ] Input validation where needed
+- [ ] Proper data sanitization
+
+#### Maintainability
+- [ ] Code is readable and self-documenting
+- [ ] Functions are focused and not too long
+- [ ] Proper separation of concerns
+- [ ] No code duplication
+
+#### Flutter-Specific
+- [ ] Widget tree is efficient
+- [ ] State management is appropriate
+- [ ] Navigation patterns are correct
+- [ ] Responsive design considerations
+
+### 3. Output Format
+
+Provide review in this format:
+
+```markdown
+## Code Review Summary
+
+### Overview
+Brief description of what was reviewed
+
+### Findings
+
+#### 🔴 Critical Issues
+Issues that must be fixed before merging
+
+#### 🟡 Suggestions
+Improvements that would enhance quality
+
+#### 🟢 Good Practices
+Positive patterns worth highlighting
+
+### Specific Comments
+File-by-file detailed comments with line references
+
+### Recommendation
+APPROVE / REQUEST_CHANGES / NEEDS_DISCUSSION
+```
+
+## Example Usage
+
+User: @code-review the changes in review_view.dart
+
+AI: [Performs structured review following the process above]
+
+</rule>

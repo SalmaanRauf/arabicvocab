@@ -134,6 +134,15 @@ class DataLoader {
 
   List<Word> getWordsForAyah(int ayahId) => _wordsByAyahId?[ayahId] ?? [];
 
+  List<Word> getWordsForSurah(int surahId) {
+    final surahAyahs = getAyahsForSurah(surahId);
+    final words = <Word>[];
+    for (final ayah in surahAyahs) {
+      words.addAll(getWordsForAyah(ayah.id));
+    }
+    return words;
+  }
+
   Root? getRootById(int? id) => id == null ? null : _rootsById?[id];
 
   Root? getRootByText(String text) =>

@@ -1,0 +1,86 @@
+---
+description: Apply Flutter/Dart best practices when working with .dart files
+globs: ["**/*.dart"]
+---
+
+<rule>
+name: flutter_dart_best_practices
+description: Comprehensive Flutter and Dart coding standards
+
+## Code Style
+
+### Naming Conventions
+- Use `snake_case` for file names (e.g., `user_profile_screen.dart`)
+- Use `PascalCase` for classes, enums, typedefs, and type parameters
+- Use `camelCase` for variables, functions, and parameters
+- Use `SCREAMING_SNAKE_CASE` for constants
+- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`, `canSubmit`)
+
+### Code Organization
+- Keep lines no longer than 80 characters when practical
+- Use trailing commas for better formatting and diffs
+- Use const constructors for immutable widgets
+- Prefer composition over inheritance
+- Use arrow syntax for simple single-expression functions
+
+### Widget Structure
+```dart
+// Good: ConsumerWidget with Riverpod
+class MyWidget extends ConsumerWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Widget implementation
+  }
+}
+```
+
+## State Management (Riverpod)
+
+### Provider Guidelines
+- Use `@riverpod` annotation for generating providers
+- Prefer `AsyncNotifierProvider` and `NotifierProvider` over `StateProvider`
+- Avoid deprecated providers: `StateProvider`, `StateNotifierProvider`, `ChangeNotifierProvider`
+- Use `ref.invalidate()` for manually triggering provider updates
+- Use `AsyncValue` for proper error handling and loading states
+
+### State Patterns
+```dart
+// Good: AsyncValue pattern
+return switch (asyncValue) {
+  AsyncData(:final value) => DataWidget(value),
+  AsyncError(:final error) => ErrorWidget(error),
+  AsyncLoading() => const LoadingWidget(),
+};
+```
+
+## Error Handling
+
+- Implement proper try-catch blocks for async operations
+- Handle empty states within the displaying screen
+- Use SelectableText for error messages when appropriate
+- Return meaningful error messages to users
+
+## Performance
+
+- Use const constructors wherever possible
+- Avoid unnecessary rebuilds with proper widget separation
+- Use ListView.builder for long lists
+- Implement proper dispose methods for controllers and streams
+
+## Testing
+
+- Write unit tests for business logic
+- Write widget tests for UI components
+- Use mockito or mocktail for mocking dependencies
+- Test edge cases and error states
+
+## Code Generation
+
+When using code generation:
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+</rule>

@@ -3,11 +3,15 @@ import 'dart:math';
 class FSRSParameters {
   const FSRSParameters({
     required this.weights,
+    this.requestRetention = 0.9,
+    this.maximumInterval = 36500,
     this.factor = 19 / 81,
     this.decay = -0.5,
   });
 
   final List<double> weights;
+  final double requestRetention;
+  final int maximumInterval;
   final double factor;
   final double decay;
 }
@@ -30,8 +34,29 @@ class FSRS {
   FSRS({
     FSRSParameters? parameters,
   }) : params = parameters ??
+            // Official FSRS-5 default weights from open-spaced-repetition
             const FSRSParameters(
-              weights: <double>[2.0, 1.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5],
+              weights: <double>[
+                0.4072, // w0: initial stability for Again
+                1.1829, // w1: initial stability for Hard
+                3.1262, // w2: initial stability for Good
+                15.4722, // w3: initial stability for Easy
+                7.2102, // w4: difficulty weight
+                0.5316, // w5: difficulty weight
+                1.0651, // w6: difficulty weight
+                0.0234, // w7: difficulty weight
+                1.616, // w8: stability decay
+                0.1544, // w9: stability weight
+                1.0824, // w10: stability weight
+                1.9813, // w11: stability weight
+                0.0953, // w12: stability weight
+                0.2975, // w13: forgetting weight
+                2.2042, // w14: forgetting weight
+                0.2407, // w15: forgetting weight
+                2.9466, // w16: forgetting weight
+                0.5034, // w17: same-day review weight
+                0.6567, // w18: same-day review weight
+              ],
             );
 
   final FSRSParameters params;

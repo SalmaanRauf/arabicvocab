@@ -121,29 +121,55 @@ class _SurahBasedContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final wordsAsync = ref.watch(wordsForSurahProvider(surahId));
+    final ayahsAsync = ref.watch(ayahsForSurahProvider(surahId));
 
-    return wordsAsync.when(
+    return ayahsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, _) => Center(child: Text('Error: $err')),
-      data: (allWords) {
-        // Filter to only words in the ayah range
-        final words = allWords.where((w) {
-          return w.ayahNumber >= ayahRange[0] && w.ayahNumber <= ayahRange[1];
+      data: (allAyahs) {
+        // Filter to only ayahs in the range
+        final ayahs = allAyahs.where((a) {
+          return a.ayahNumber >= ayahRange[0] && a.ayahNumber <= ayahRange[1];
         }).toList();
 
-        if (words.isEmpty) {
-          return const Center(child: Text('No words found for this range'));
+        if (ayahs.isEmpty) {
+          return const Center(child: Text('No ayahs found for this range'));
         }
 
-        return SingleChildScrollView(
+        return ListView.builder(
           padding: const EdgeInsets.all(16),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            textDirection: TextDirection.rtl,
-            children: words.map((word) => WordChip(word: word)).toList(),
-          ),
+          itemCount: ayahs.length,
+          itemBuilder: (context, index) {
+            final ayah = ayahs[index];
+            final wordsAsync = ref.watch(wordsForAyahProvider(ayah.id));
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '${ayah.ayahNumber}',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  const SizedBox(height: 4),
+                  wordsAsync.when(
+                    loading: () => const SizedBox(
+                      height: 40,
+                      child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                    ),
+                    error: (e, _) => Text('Error: $e'),
+                    data: (words) => Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      textDirection: TextDirection.rtl,
+                      children: words.map((word) => WordChip(word: word)).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         );
       },
     );

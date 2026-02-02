@@ -1,0 +1,92 @@
+---
+description: Apply project architecture rules for the Quran Vocabulary app
+globs: ["**/quran_vocab/**/*.dart"]
+---
+
+<rule>
+name: quran_vocab_architecture
+description: Architecture and patterns specific to the Quran Vocabulary Flutter app
+
+## Project Structure
+
+This is a Flutter application for learning Quran vocabulary using spaced repetition (FSRS algorithm).
+
+### Directory Organization
+```
+lib/
+├── app.dart              # App widget configuration
+├── main.dart             # Entry point
+├── data/
+│   ├── data_loader.dart  # JSON data loading utilities
+│   ├── db/               # Database layer (Drift/SQLite)
+│   ├── models/           # Data models (Ayah, Word, Root, etc.)
+│   └── repository/       # Data repository abstraction
+├── presentation/
+│   ├── routes/           # Navigation/routing (auto_route)
+│   ├── state/            # Riverpod providers
+│   ├── theme/            # App theming
+│   ├── views/            # Screen widgets
+│   └── widgets/          # Reusable UI components
+└── services/
+    ├── audio/            # Audio playback management
+    ├── srs/              # Spaced repetition system (FSRS)
+    └── storage/          # Local storage for progress
+```
+
+## Domain Models
+
+### Core Entities
+- **Surah**: Quran chapter metadata
+- **Ayah**: Individual verse with text and translation
+- **Word**: Arabic word with position, lemma reference
+- **Root**: Arabic root letters for word families
+- **Lemma**: Base form of words with meanings
+- **UserProgress**: SRS learning progress per word
+
+### Model Guidelines
+- Use immutable classes with `@freezed` when appropriate
+- Include proper `toJson`/`fromJson` for serialization
+- Keep models focused and single-purpose
+
+## State Management
+
+### Provider Organization
+- `quran_providers.dart`: Surah, Ayah, Word data providers
+- `srs_providers.dart`: Learning progress and review providers
+- `audio_providers.dart`: Audio playback state
+- `settings_providers.dart`: User preferences
+
+### Provider Patterns
+```dart
+// Data fetching provider
+@riverpod
+Future<List<Surah>> surahs(SurahsRef ref) async {
+  final repository = ref.watch(quranRepositoryProvider);
+  return repository.getSurahs();
+}
+
+// State notifier for mutable state
+@riverpod
+class ReviewSession extends _$ReviewSession {
+  @override
+  ReviewState build() => ReviewState.initial();
+  
+  void submitAnswer(bool correct) { /* ... */ }
+}
+```
+
+## Arabic Text Handling
+
+- Always use proper RTL text direction for Arabic content
+- Use appropriate Arabic fonts (Amiri, Scheherazade)
+- Handle Arabic diacritics (tashkeel) properly
+- Support both with/without vowel marks display
+
+## SRS System (FSRS)
+
+- FSRS algorithm handles scheduling reviews
+- Track difficulty, stability, and retrievability per word
+- Store review history for analytics
+- Respect user's daily review limits
+
+</rule>

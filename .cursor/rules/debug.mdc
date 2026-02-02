@@ -1,0 +1,130 @@
+---
+description: Invoke with @debug to systematically debug issues
+globs: []
+---
+
+<rule>
+name: debug_skill
+description: Systematic debugging workflow for Flutter apps
+
+# Debug Skill
+
+When invoked with `@debug`, follow this systematic debugging approach.
+
+## Debugging Process
+
+### 1. Gather Information
+- What is the expected behavior?
+- What is the actual behavior?
+- When did it start happening?
+- Can it be reproduced consistently?
+- Any recent changes?
+
+### 2. Reproduce the Issue
+- Identify exact steps to reproduce
+- Note the environment (device, OS, Flutter version)
+- Check if it's consistent or intermittent
+
+### 3. Isolate the Problem
+
+#### Widget Issues
+```dart
+// Add debug prints to track rebuilds
+@override
+Widget build(BuildContext context) {
+  debugPrint('MyWidget building');
+  return ...
+}
+```
+
+#### State Issues
+```dart
+// Log state changes
+ref.listen(myProvider, (prev, next) {
+  debugPrint('State changed: $prev -> $next');
+});
+```
+
+#### Async Issues
+```dart
+// Track async operations
+Future<void> fetchData() async {
+  debugPrint('fetchData started');
+  try {
+    final result = await api.getData();
+    debugPrint('fetchData success: $result');
+  } catch (e, stack) {
+    debugPrint('fetchData error: $e\n$stack');
+  }
+}
+```
+
+### 4. Common Flutter Issues
+
+#### Build Errors
+- Check `pubspec.yaml` dependencies
+- Run `flutter clean && flutter pub get`
+- Check for version conflicts
+
+#### Widget Not Updating
+- Verify state is actually changing
+- Check if using `const` incorrectly
+- Ensure proper key usage for lists
+
+#### Performance Issues
+- Use Flutter DevTools Performance view
+- Check for unnecessary rebuilds
+- Profile with `flutter run --profile`
+
+#### Platform-Specific Issues
+- Check platform channel implementation
+- Verify permissions in native code
+- Test on actual devices
+
+### 5. Debugging Tools
+
+```dart
+// Assert for development
+assert(value != null, 'Value should not be null');
+
+// Conditional debugging
+if (kDebugMode) {
+  debugPrint('Debug info: $data');
+}
+
+// Widget inspector
+import 'package:flutter/rendering.dart';
+debugPaintSizeEnabled = true;
+```
+
+### 6. Output Format
+
+When reporting debug findings:
+
+```markdown
+## Debug Report
+
+### Issue Summary
+[Brief description]
+
+### Environment
+- Flutter: [version]
+- Device: [device/emulator]
+- OS: [platform and version]
+
+### Steps to Reproduce
+1. [Step 1]
+2. [Step 2]
+3. [Observe issue]
+
+### Root Cause
+[Explanation of what's causing the issue]
+
+### Solution
+[Proposed fix with code]
+
+### Prevention
+[How to prevent similar issues]
+```
+
+</rule>
