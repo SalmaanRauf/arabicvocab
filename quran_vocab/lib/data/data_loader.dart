@@ -78,7 +78,7 @@ class DataLoader {
         ayahId: aId,
         position: e['position'] as int,
         textUthmani: e['text_uthmani'] as String,
-        textIndopak: e['text_uthmani'] as String,
+        textIndopak: e['text_indopak'] as String? ?? e['text_uthmani'] as String,
         translationEn: e['translation_en'] as String,
         transliteration: e['transliteration'] as String,
         rootId: rootMatch.isNotEmpty ? rootMatch.first.id : null,
