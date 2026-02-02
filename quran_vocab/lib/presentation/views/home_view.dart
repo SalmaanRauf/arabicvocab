@@ -17,6 +17,16 @@ class HomeView extends ConsumerWidget {
         title: const Text('Quranic Vocabulary'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.bar_chart),
+            tooltip: 'Progress',
+            onPressed: () => context.go(AppRouter.dashboardPath),
+          ),
+          IconButton(
+            icon: const Icon(Icons.menu_book),
+            tooltip: 'Learning Path',
+            onPressed: () => context.go(AppRouter.curriculumPath),
+          ),
+          IconButton(
             icon: const Icon(Icons.school),
             tooltip: 'Review',
             onPressed: () => context.go(AppRouter.reviewPath),
