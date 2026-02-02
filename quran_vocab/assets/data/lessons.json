@@ -1,0 +1,360 @@
+{
+    "units": [
+        {
+            "id": 1,
+            "title": "Al-Fatiha: The Opening",
+            "description": "Master the 29 words of Al-Fatiha - recited 17+ times daily in prayer",
+            "targetCoverage": 5,
+            "lessons": [
+                {
+                    "id": 1,
+                    "title": "Bismillah & Praise",
+                    "description": "In the name of Allah, praise be to the Lord",
+                    "surahId": 1,
+                    "ayahRange": [
+                        1,
+                        2
+                    ],
+                    "wordCount": 8
+                },
+                {
+                    "id": 2,
+                    "title": "Divine Attributes",
+                    "description": "The Most Gracious, Most Merciful, Master of the Day",
+                    "surahId": 1,
+                    "ayahRange": [
+                        3,
+                        4
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 3,
+                    "title": "Worship & Guidance",
+                    "description": "You alone we worship, Guide us to the straight path",
+                    "surahId": 1,
+                    "ayahRange": [
+                        5,
+                        6
+                    ],
+                    "wordCount": 7
+                },
+                {
+                    "id": 4,
+                    "title": "The Path",
+                    "description": "The path of those blessed, not of those who went astray",
+                    "surahId": 1,
+                    "ayahRange": [
+                        7,
+                        7
+                    ],
+                    "wordCount": 9
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Essential Particles",
+            "description": "High-frequency connecting words that appear throughout the Quran",
+            "targetCoverage": 20,
+            "lessons": [
+                {
+                    "id": 5,
+                    "title": "Connectors & Prepositions",
+                    "description": "و (and), في (in), من (from), إلى (to), على (on)",
+                    "vocabulary": [
+                        "wa",
+                        "fi",
+                        "min",
+                        "ila",
+                        "ala"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 6,
+                    "title": "Demonstratives",
+                    "description": "ذلك (that), هذا (this), الذي (who/which)",
+                    "vocabulary": [
+                        "dhalika",
+                        "hadha",
+                        "alladhi"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 7,
+                    "title": "Pronouns",
+                    "description": "هو (he), هي (she), هم (they), أنتم (you all)",
+                    "vocabulary": [
+                        "huwa",
+                        "hiya",
+                        "hum",
+                        "antum"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 8,
+                    "title": "Negation & Questions",
+                    "description": "لا (no/not), ما (what/not), هل (is/are?)",
+                    "vocabulary": [
+                        "la",
+                        "ma",
+                        "hal"
+                    ],
+                    "wordCount": 5
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Core Verbs",
+            "description": "The most common verbs - actions that drive every story",
+            "targetCoverage": 35,
+            "lessons": [
+                {
+                    "id": 9,
+                    "title": "Being & Belief",
+                    "description": "كان (was), آمن (believed), كفر (disbelieved)",
+                    "vocabulary": [
+                        "kana",
+                        "amana",
+                        "kafara"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 10,
+                    "title": "Communication",
+                    "description": "قال (said), سمع (heard), علم (knew)",
+                    "vocabulary": [
+                        "qala",
+                        "samia",
+                        "alima"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 11,
+                    "title": "Movement & Action",
+                    "description": "جاء (came), أتى (came), ذهب (went), خرج (exited)",
+                    "vocabulary": [
+                        "jaa",
+                        "ata",
+                        "dhahaba",
+                        "kharaja"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 12,
+                    "title": "Creation & Giving",
+                    "description": "خلق (created), جعل (made), أعطى (gave)",
+                    "vocabulary": [
+                        "khalaqa",
+                        "jaala",
+                        "aata"
+                    ],
+                    "wordCount": 5
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Divine Names & Attributes",
+            "description": "Names of Allah and key spiritual vocabulary",
+            "targetCoverage": 45,
+            "lessons": [
+                {
+                    "id": 13,
+                    "title": "Names of Allah",
+                    "description": "الله (Allah), الرب (Lord), الرحمن (Most Gracious)",
+                    "vocabulary": [
+                        "allah",
+                        "rabb",
+                        "rahman"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 14,
+                    "title": "Divine Actions",
+                    "description": "غفر (forgave), رحم (had mercy), هدى (guided)",
+                    "vocabulary": [
+                        "ghafara",
+                        "rahima",
+                        "hada"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 15,
+                    "title": "Spiritual States",
+                    "description": "تقوى (God-consciousness), إيمان (faith), إسلام (submission)",
+                    "vocabulary": [
+                        "taqwa",
+                        "iman",
+                        "islam"
+                    ],
+                    "wordCount": 5
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Short Surahs",
+            "description": "Complete vocabulary from commonly memorized surahs",
+            "targetCoverage": 55,
+            "lessons": [
+                {
+                    "id": 16,
+                    "title": "Al-Ikhlas (112)",
+                    "description": "Say: He is Allah, the One",
+                    "surahId": 112,
+                    "ayahRange": [
+                        1,
+                        4
+                    ],
+                    "wordCount": 15
+                },
+                {
+                    "id": 17,
+                    "title": "Al-Falaq (113)",
+                    "description": "Say: I seek refuge in the Lord of daybreak",
+                    "surahId": 113,
+                    "ayahRange": [
+                        1,
+                        5
+                    ],
+                    "wordCount": 23
+                },
+                {
+                    "id": 18,
+                    "title": "An-Nas (114)",
+                    "description": "Say: I seek refuge in the Lord of mankind",
+                    "surahId": 114,
+                    "ayahRange": [
+                        1,
+                        6
+                    ],
+                    "wordCount": 20
+                },
+                {
+                    "id": 19,
+                    "title": "An-Nasr (110)",
+                    "description": "When the victory of Allah comes",
+                    "surahId": 110,
+                    "ayahRange": [
+                        1,
+                        3
+                    ],
+                    "wordCount": 19
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "title": "Quranic Nouns",
+            "description": "People, places, and things frequently mentioned",
+            "targetCoverage": 65,
+            "lessons": [
+                {
+                    "id": 20,
+                    "title": "People & Groups",
+                    "description": "الناس (people), قوم (nation), أهل (family/people of)",
+                    "vocabulary": [
+                        "nas",
+                        "qawm",
+                        "ahl"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 21,
+                    "title": "Time Words",
+                    "description": "يوم (day), ليل (night), دهر (time/age)",
+                    "vocabulary": [
+                        "yawm",
+                        "layl",
+                        "dahr"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 22,
+                    "title": "Places",
+                    "description": "أرض (earth), سماء (sky/heaven), جنة (paradise), نار (fire)",
+                    "vocabulary": [
+                        "ard",
+                        "sama",
+                        "jannah",
+                        "nar"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 23,
+                    "title": "Body & Soul",
+                    "description": "قلب (heart), نفس (soul/self), عين (eye)",
+                    "vocabulary": [
+                        "qalb",
+                        "nafs",
+                        "ayn"
+                    ],
+                    "wordCount": 5
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Advanced Vocabulary",
+            "description": "Complete your understanding of 80% of Quranic text",
+            "targetCoverage": 80,
+            "lessons": [
+                {
+                    "id": 24,
+                    "title": "Judgment & Afterlife",
+                    "description": "حساب (reckoning), بعث (resurrection), ثواب (reward)",
+                    "vocabulary": [
+                        "hisab",
+                        "bath",
+                        "thawab"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 25,
+                    "title": "Prophets & Messengers",
+                    "description": "نبي (prophet), رسول (messenger), كتاب (book)",
+                    "vocabulary": [
+                        "nabi",
+                        "rasul",
+                        "kitab"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 26,
+                    "title": "Abstract Concepts",
+                    "description": "حق (truth), باطل (falsehood), عدل (justice)",
+                    "vocabulary": [
+                        "haqq",
+                        "batil",
+                        "adl"
+                    ],
+                    "wordCount": 5
+                },
+                {
+                    "id": 27,
+                    "title": "Final Review",
+                    "description": "Consolidate and master the 80% vocabulary",
+                    "vocabulary": [
+                        "review"
+                    ],
+                    "wordCount": 20
+                }
+            ]
+        }
+    ]
+}
