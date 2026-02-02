@@ -4,6 +4,11 @@ import 'package:just_audio/just_audio.dart';
 
 import 'segment.dart';
 
+/// Base URL for verse audio from EveryAyah CDN (Mishary al-Afasy reciter).
+/// Format: {surahNumber padded to 3 digits}{ayahNumber padded to 3 digits}.mp3
+const String _audioBaseUrl =
+    'https://everyayah.com/data/Alafasy_128kbps/';
+
 class AudioManager {
   AudioManager() {
     _subscription = _player.positionStream.listen(_handlePosition);
@@ -25,6 +30,23 @@ class AudioManager {
   }) async {
     _segments = segments;
     await _player.setUrl(url);
+  }
+
+  /// Convenience method to load audio for a specific ayah.
+  /// Uses EveryAyah CDN with Mishary al-Afasy reciter.
+  /// 
+  /// [surahId] - Surah number (1-114)
+  /// [ayahNumber] - Ayah number within the surah
+  /// [segments] - Optional word timing segments for karaoke highlighting
+  Future<void> loadAyahAudio({
+    required int surahId,
+    required int ayahNumber,
+    List<Segment> segments = const [],
+  }) async {
+    final surahPadded = surahId.toString().padLeft(3, '0');
+    final ayahPadded = ayahNumber.toString().padLeft(3, '0');
+    final url = '$_audioBaseUrl$surahPadded$ayahPadded.mp3';
+    await setSource(url: url, segments: segments);
   }
 
   void setOffsetMs(int offsetMs) {
@@ -73,3 +95,4 @@ class AudioManager {
     await _activeWordController.close();
   }
 }
+
