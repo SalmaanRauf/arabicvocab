@@ -119,12 +119,13 @@ class AudioManager {
       }
       return;
     }
-    final adjustedMs = position.inMilliseconds + _offsetMs;
-    if (_stopAtMs != null && adjustedMs >= _stopAtMs!) {
+    final positionMs = position.inMilliseconds;
+    if (_stopAtMs != null && positionMs >= _stopAtMs!) {
       _stopAtMs = null;
       _player.pause();
       return;
     }
+    final adjustedMs = positionMs + _offsetMs;
     final wordId = findWordIdAt(_segments, adjustedMs);
     if (wordId != _lastEmittedWordId) {
       _lastEmittedWordId = wordId;
