@@ -63,16 +63,17 @@ class _UnitCard extends ConsumerWidget {
     final progress = unit.lessons.isEmpty
         ? 0.0
         : completedCount / unit.lessons.length;
+    final scheme = Theme.of(context).colorScheme;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: ExpansionTile(
         leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: scheme.surfaceVariant,
           child: Text(
             '${unit.id}',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              color: scheme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -94,9 +95,7 @@ class _UnitCard extends ConsumerWidget {
                 Expanded(
                   child: LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Theme.of(context)
-                        .colorScheme
-                        .surfaceContainerHighest,
+                    backgroundColor: scheme.surfaceVariant,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -125,6 +124,7 @@ class _LessonTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isUnlocked = ref.watch(lessonUnlockedProvider(lesson.id));
     final isCompleted = ref.watch(completedLessonsProvider).contains(lesson.id);
+    final scheme = Theme.of(context).colorScheme;
 
     return ListTile(
       leading: Icon(
@@ -134,15 +134,15 @@ class _LessonTile extends ConsumerWidget {
                 ? Icons.play_circle_outline
                 : Icons.lock_outline,
         color: isCompleted
-            ? Colors.green
+            ? scheme.tertiary
             : isUnlocked
-                ? Theme.of(context).colorScheme.primary
-                : Colors.grey,
+                ? scheme.primary
+                : scheme.onSurfaceVariant,
       ),
       title: Text(
         lesson.title,
         style: TextStyle(
-          color: isUnlocked ? null : Colors.grey,
+          color: isUnlocked ? null : scheme.onSurfaceVariant,
         ),
       ),
       subtitle: Text(

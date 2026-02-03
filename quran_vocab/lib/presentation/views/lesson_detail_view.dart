@@ -47,10 +47,15 @@ class LessonDetailView extends ConsumerWidget {
   }
 
   Widget _buildHeader(BuildContext context, String description, int wordCount) {
+    final scheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
-      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      decoration: BoxDecoration(
+        color: scheme.surfaceVariant,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: scheme.outline),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -183,6 +188,7 @@ class _VocabularyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     if (vocabulary.isEmpty || vocabulary.first == 'review') {
       return const Center(
         child: Padding(
@@ -214,6 +220,7 @@ class _VocabularyContent extends StatelessWidget {
         return Card(
           child: ListTile(
             leading: CircleAvatar(
+              backgroundColor: scheme.surfaceVariant,
               child: Text('${index + 1}'),
             ),
             title: Text(

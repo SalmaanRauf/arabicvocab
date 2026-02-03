@@ -96,6 +96,8 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
     final loadedSurahId = ref.watch(loadedSurahIdProvider);
     final ayahsAsync = ref.watch(ayahsProvider);
     final isLoaded = loadedSurahId == selectedSurahId;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
 
     return Card(
       child: Padding(
@@ -105,14 +107,18 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
           children: [
             Text(
               'Audio (Mishary al-Afasy)',
-              style: Theme.of(context).textTheme.titleMedium,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 12),
             Text(
               isLoaded
                   ? 'Audio loaded for this surah.'
                   : 'Load audio to enable ayah playback.',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: scheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 12),
             ayahsAsync.when(
@@ -121,7 +127,7 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
                 if (ayahCount == 0) return const SizedBox.shrink();
                 return Align(
                   alignment: Alignment.centerLeft,
-                  child: ElevatedButton.icon(
+                  child: FilledButton.icon(
                     icon: _isAudioLoading
                         ? const SizedBox(
                             width: 16,

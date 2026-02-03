@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:just_audio/just_audio.dart';
 
 import 'segment.dart';
+import 'segment_matcher.dart';
 
 /// Base URL for verse audio from EveryAyah CDN (Mishary al-Afasy reciter).
 /// Format: {surahNumber padded to 3 digits}{ayahNumber padded to 3 digits}.mp3
@@ -24,6 +25,7 @@ class AudioManager {
   int? _loadedSurahId;
   int _loadedAyahCount = 0;
   Map<int, List<Segment>> _segmentsByAyah = const {};
+  int? _stopAtMs;
 
   Stream<int?> get activeWordStream => _activeWordController.stream;
 
@@ -48,6 +50,7 @@ class AudioManager {
     _loadedSurahId = null;
     _loadedAyahCount = 0;
     _segmentsByAyah = const {};
+    _stopAtMs = _segments.isEmpty ? null : _segments.last.endMs;
     await _player.setUrl(url);
   }
 
@@ -81,6 +84,7 @@ class AudioManager {
     _loadedSurahId = surahId;
     _loadedAyahCount = ayahCount;
     _segmentsByAyah = segmentsByAyah;
+    _stopAtMs = null;
     await _player.setAudioSource(source);
   }
 
@@ -98,6 +102,7 @@ class AudioManager {
     if (_loadedSurahId != surahId) return;
     if (ayahNumber < 1 || ayahNumber > _loadedAyahCount) return;
     _segments = _segmentsByAyah[ayahNumber] ?? const [];
+    _stopAtMs = _segments.isEmpty ? null : _segments.last.endMs;
     if (_lastEmittedWordId != null) {
       _lastEmittedWordId = null;
       _activeWordController.add(null);
@@ -114,29 +119,24 @@ class AudioManager {
       }
       return;
     }
-    final adjustedMs = position.inMilliseconds + _offsetMs;
-    final wordId = _findWordIdAt(adjustedMs);
+    final positionMs = position.inMilliseconds;
+    if (_stopAtMs != null && positionMs >= _stopAtMs!) {
+      _stopAtMs = null;
+      _player.pause();
+      return;
+    }
+    final adjustedMs = positionMs + _offsetMs;
+    final wordId = findWordIdAt(_segments, adjustedMs);
     if (wordId != _lastEmittedWordId) {
       _lastEmittedWordId = wordId;
       _activeWordController.add(wordId);
     }
   }
 
-  int? _findWordIdAt(int ms) {
-    int low = 0;
-    int high = _segments.length - 1;
-    while (low <= high) {
-      final mid = (low + high) >> 1;
-      final seg = _segments[mid];
-      if (ms < seg.startMs) {
-        high = mid - 1;
-      } else if (ms > seg.endMs) {
-        low = mid + 1;
-      } else {
-        return seg.wordId;
-      }
-    }
-    return null;
+  static bool shouldStopAtEnd(List<Segment> segments, int positionMs) {
+    if (segments.isEmpty) return false;
+    final lastEnd = segments.last.endMs;
+    return positionMs >= lastEnd;
   }
 
   Future<void> dispose() async {

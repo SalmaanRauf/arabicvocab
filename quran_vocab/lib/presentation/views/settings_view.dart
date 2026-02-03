@@ -10,6 +10,8 @@ class SettingsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final offsetMs = ref.watch(audioOffsetMsProvider);
+    final themeMode = ref.watch(themeModeProvider);
+    final isDarkMode = themeMode == ThemeMode.dark;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -19,6 +21,23 @@ class SettingsView extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Appearance',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Card(
+              child: SwitchListTile(
+                title: const Text('Dark mode'),
+                subtitle: Text(isDarkMode ? 'Warm Noir' : 'Parchment'),
+                value: isDarkMode,
+                onChanged: (value) {
+                  ref.read(themeModeProvider.notifier).state =
+                      value ? ThemeMode.dark : ThemeMode.light;
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
             Text(
               'Script',
               style: Theme.of(context).textTheme.titleMedium,

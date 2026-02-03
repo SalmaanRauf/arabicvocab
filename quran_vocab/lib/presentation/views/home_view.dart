@@ -52,32 +52,46 @@ class HomeView extends ConsumerWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.primaryContainer,
-            Theme.of(context).colorScheme.primary.withOpacity(0.1),
-          ],
+          colors: isDark
+              ? const [
+                  Color(0xFF2A1E10),
+                  Color(0xFF7B4C1B),
+                  Color(0xFFD97757),
+                ]
+              : const [
+                  Color(0xFFFFF2E5),
+                  Color(0xFFF7E3D6),
+                ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: scheme.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Learn Quranic Arabic',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: isDark ? scheme.onPrimary : scheme.onSurface,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'Master the top 80% most frequent vocabulary through word-by-word study and spaced repetition.',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: isDark ? scheme.onPrimary.withOpacity(0.9) : scheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -91,44 +105,49 @@ class HomeView extends ConsumerWidget {
       itemCount: surahs.length,
       itemBuilder: (context, index) {
         final surah = surahs[index];
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            child: Text(
-              '${surah.id}',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                fontWeight: FontWeight.bold,
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          child: Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                child: Text(
+                  '${surah.id}',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
+              title: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      surah.nameEnglish,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Text(
+                    surah.nameArabic,
+                    style: const TextStyle(
+                      fontFamily: 'Amiri',
+                      fontSize: 18,
+                    ),
+                    textDirection: TextDirection.rtl,
+                  ),
+                ],
+              ),
+              subtitle: Text(
+                '${surah.verseCount} verses • ${surah.type}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                ref.read(selectedSurahIdProvider.notifier).state = surah.id;
+                context.go(AppRouter.readerPath);
+              },
             ),
           ),
-          title: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  surah.nameEnglish,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ),
-              Text(
-                surah.nameArabic,
-                style: const TextStyle(
-                  fontFamily: 'Amiri',
-                  fontSize: 18,
-                ),
-                textDirection: TextDirection.rtl,
-              ),
-            ],
-          ),
-          subtitle: Text(
-            '${surah.verseCount} verses • ${surah.type}',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () {
-            ref.read(selectedSurahIdProvider.notifier).state = surah.id;
-            context.go(AppRouter.readerPath);
-          },
         );
       },
     );

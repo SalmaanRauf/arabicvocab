@@ -25,53 +25,54 @@ class AyahWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final wordsAsync = ref.watch(wordsForAyahProvider(ayah.id));
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6E6E6)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Text(
-                '${ayah.surahId}:${ayah.ayahNumber}',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Text(
+                  '${ayah.surahId}:${ayah.ayahNumber}',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                    letterSpacing: 0.4,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
-                textAlign: TextAlign.left,
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.play_arrow),
+                  tooltip: 'Play ayah',
+                  visualDensity: VisualDensity.compact,
+                  onPressed: isAudioReady ? onPlayAyah : null,
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            wordsAsync.when(
+              data: (words) => _AyahWords(
+                words: words,
+                highlightWordId: highlightWordId,
               ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.play_arrow),
-                tooltip: 'Play ayah',
-                visualDensity: VisualDensity.compact,
-                onPressed: isAudioReady ? onPlayAyah : null,
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => Text('Failed to load words: $error'),
+            ),
+            if (ayah.translationEn.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Text(
+                ayah.translationEn,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
             ],
-          ),
-          const SizedBox(height: 8),
-          wordsAsync.when(
-            data: (words) => _AyahWords(
-              words: words,
-              highlightWordId: highlightWordId,
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Text('Failed to load words: $error'),
-          ),
-          if (ayah.translationEn.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Text(
-              ayah.translationEn,
-              style: theme.textTheme.bodyMedium,
-            ),
           ],
-        ],
+        ),
       ),
     );
   }
