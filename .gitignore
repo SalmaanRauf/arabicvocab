@@ -2,3 +2,5 @@
 tools/flutter/
 tools/flutter.zip
 tools/.flutter/
+
+.worktrees/
