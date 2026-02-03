@@ -78,6 +78,7 @@ flutter:
     - assets/data/words_full.json
     - assets/data/roots.json
     - assets/data/lessons.json
+    - assets/data/audio_align/Alafasy_128kbps.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

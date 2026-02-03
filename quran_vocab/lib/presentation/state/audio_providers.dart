@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/audio_alignment_loader.dart';
 import '../../services/audio/audio_manager.dart';
 import '../../services/audio/segment.dart';
 import 'quran_providers.dart';
@@ -12,19 +13,32 @@ final audioManagerProvider = Provider<AudioManager>((ref) {
 
 final audioUrlProvider = StateProvider<String>((ref) => '');
 
-final audioSegmentsProvider = FutureProvider<List<Segment>>((ref) async {
-  final surahId = ref.watch(selectedSurahIdProvider);
-  if (surahId == null) {
-    return const <Segment>[];
-  }
-  // Audio segments will be loaded from assets in a future update.
-  // For now, return empty list - audio sync requires alignment data.
-  return const <Segment>[];
-});
-
 final audioOffsetMsProvider = StateProvider<int>((ref) => 0);
 
 final loadedSurahIdProvider = StateProvider<int?>((ref) => null);
+
+final audioAlignmentProvider = FutureProvider<AudioAlignmentLoader>((ref) async {
+  final loader = AudioAlignmentLoader.instance;
+  await loader.load();
+  return loader;
+});
+
+final audioSegmentsBySurahProvider =
+    FutureProvider.family<Map<int, List<Segment>>, int>((ref, surahId) async {
+  final loader = await ref.watch(dataLoaderProvider.future);
+  final alignment = await ref.watch(audioAlignmentProvider.future);
+  final ayahs = loader.getAyahsForSurah(surahId);
+  final segmentsByAyah = <int, List<Segment>>{};
+
+  for (final ayah in ayahs) {
+    final raw = alignment.getRawSegments(surahId, ayah.ayahNumber);
+    final words = loader.getWordsForAyah(ayah.id);
+    segmentsByAyah[ayah.ayahNumber] =
+        AudioAlignmentLoader.buildSegmentsForAyah(words, raw);
+  }
+
+  return segmentsByAyah;
+});
 
 final activeWordIdProvider = StreamProvider<int?>((ref) {
   final manager = ref.watch(audioManagerProvider);
