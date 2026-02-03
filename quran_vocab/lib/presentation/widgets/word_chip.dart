@@ -21,17 +21,26 @@ class WordChip extends ConsumerWidget {
     final script = ref.watch(scriptPreferenceProvider);
     final isIndopak = script == ScriptType.indopak;
     final text = isIndopak ? word.textIndopak : word.textUthmani;
+    final scheme = theme.colorScheme;
 
     // Use Lateef for IndoPak script, otherwise default Arabic font
     final textStyle = isIndopak
         ? TextStyle(
             fontFamily: 'Lateef',
             fontSize: 28, // Slightly larger for IndoPak readability
-            height: 1.6,  // Slightly tighter for Lateef
-            color: isHighlighted ? theme.colorScheme.primary : theme.primaryColor,
+            height: 1.6, // Slightly tighter for Lateef
+            color: scheme.onSurface,
+            fontWeight: isHighlighted ? FontWeight.w700 : FontWeight.w500,
+            decoration:
+                isHighlighted ? TextDecoration.underline : TextDecoration.none,
+            decorationColor: scheme.primary,
           )
         : theme.textTheme.titleLarge?.copyWith(
-            color: isHighlighted ? theme.colorScheme.primary : theme.primaryColor,
+            color: scheme.onSurface,
+            fontWeight: isHighlighted ? FontWeight.w700 : FontWeight.w500,
+            decoration:
+                isHighlighted ? TextDecoration.underline : TextDecoration.none,
+            decorationColor: scheme.primary,
           );
 
     return InkWell(
@@ -40,9 +49,11 @@ class WordChip extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: isHighlighted
-              ? theme.colorScheme.primary.withOpacity(0.15)
-              : Colors.transparent,
+          color: isHighlighted ? scheme.primary.withOpacity(0.12) : Colors.transparent,
+          border: Border.all(
+            color: isHighlighted ? scheme.primary.withOpacity(0.55) : Colors.transparent,
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
