@@ -139,6 +139,12 @@ class AudioManager {
     return null;
   }
 
+  static bool shouldStopAtEnd(List<Segment> segments, int positionMs) {
+    if (segments.isEmpty) return false;
+    final lastEnd = segments.last.endMs;
+    return positionMs >= lastEnd;
+  }
+
   Future<void> dispose() async {
     await _subscription?.cancel();
     await _player.dispose();
