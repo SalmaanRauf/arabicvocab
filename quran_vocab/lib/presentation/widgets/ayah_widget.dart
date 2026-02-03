@@ -12,10 +12,14 @@ class AyahWidget extends ConsumerWidget {
     super.key,
     required this.ayah,
     required this.highlightWordId,
+    required this.isAudioReady,
+    required this.onPlayAyah,
   });
 
   final Ayah ayah;
   final int? highlightWordId;
+  final bool isAudioReady;
+  final VoidCallback? onPlayAyah;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,12 +37,23 @@ class AyahWidget extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            '${ayah.surahId}:${ayah.ayahNumber}',
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-            textAlign: TextAlign.left,
+          Row(
+            children: [
+              Text(
+                '${ayah.surahId}:${ayah.ayahNumber}',
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                textAlign: TextAlign.left,
+              ),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.play_arrow),
+                tooltip: 'Play ayah',
+                visualDensity: VisualDensity.compact,
+                onPressed: isAudioReady ? onPlayAyah : null,
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           wordsAsync.when(

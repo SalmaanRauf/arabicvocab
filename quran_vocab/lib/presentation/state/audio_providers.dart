@@ -24,6 +24,8 @@ final audioSegmentsProvider = FutureProvider<List<Segment>>((ref) async {
 
 final audioOffsetMsProvider = StateProvider<int>((ref) => 0);
 
+final loadedSurahIdProvider = StateProvider<int?>((ref) => null);
+
 final activeWordIdProvider = StreamProvider<int?>((ref) {
   final manager = ref.watch(audioManagerProvider);
   final offset = ref.watch(audioOffsetMsProvider);
