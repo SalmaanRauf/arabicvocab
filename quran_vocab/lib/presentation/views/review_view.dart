@@ -12,6 +12,7 @@ class ReviewView extends ConsumerWidget {
     final dueAsync = ref.watch(dueProgressProvider);
     final progress = ref.watch(currentProgressProvider);
     final rootAsync = ref.watch(currentRootProvider);
+    final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -83,22 +84,22 @@ class ReviewView extends ConsumerWidget {
                   children: [
                     _ReviewButton(
                       label: 'Again',
-                      color: Colors.red,
+                      color: scheme.error,
                       onTap: () => _handleReview(ref, progress, 1),
                     ),
                     _ReviewButton(
                       label: 'Hard',
-                      color: Colors.orange,
+                      color: scheme.primary,
                       onTap: () => _handleReview(ref, progress, 2),
                     ),
                     _ReviewButton(
                       label: 'Good',
-                      color: Colors.green,
+                      color: scheme.tertiary,
                       onTap: () => _handleReview(ref, progress, 3),
                     ),
                     _ReviewButton(
                       label: 'Easy',
-                      color: Colors.blue,
+                      color: scheme.secondary,
                       onTap: () => _handleReview(ref, progress, 4),
                     ),
                   ],
@@ -157,9 +158,9 @@ class _ReviewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: onTap,
-      style: ElevatedButton.styleFrom(
+      style: FilledButton.styleFrom(
         backgroundColor: color,
         foregroundColor: Colors.white,
       ),

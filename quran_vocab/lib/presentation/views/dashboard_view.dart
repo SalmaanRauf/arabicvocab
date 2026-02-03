@@ -48,6 +48,7 @@ class _CoverageCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final coverage = ref.watch(quranCoverageProvider);
     final percentText = (coverage * 100).toStringAsFixed(1);
+    final scheme = Theme.of(context).colorScheme;
 
     return Card(
       child: Padding(
@@ -63,11 +64,9 @@ class _CoverageCard extends ConsumerWidget {
                   CircularProgressIndicator(
                     value: coverage,
                     strokeWidth: 12,
-                    backgroundColor: Theme.of(context)
-                        .colorScheme
-                        .surfaceContainerHighest,
+                    backgroundColor: scheme.surfaceVariant,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.primary,
+                      scheme.primary,
                     ),
                   ),
                   Center(
@@ -85,14 +84,17 @@ class _CoverageCard extends ConsumerWidget {
             Text(
               'Quran Understanding',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: 4),
             Text(
               'You understand $percentText% of the Quran\'s vocabulary',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: scheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -105,17 +107,17 @@ class _StreakCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final streakAsync = ref.watch(streakProvider);
+    final scheme = Theme.of(context).colorScheme;
 
     return Card(
-      color: Colors.orange.shade50,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const Icon(
+            Icon(
               Icons.local_fire_department,
               size: 40,
-              color: Colors.deepOrange,
+              color: scheme.primary,
             ),
             const SizedBox(height: 8),
             Text(
@@ -126,12 +128,15 @@ class _StreakCard extends ConsumerWidget {
               ),
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Colors.deepOrange,
+                    color: scheme.onSurface,
                   ),
             ),
             Text(
               'Day Streak',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: scheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -144,33 +149,39 @@ class _WordsLearnedCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wordsLearned = ref.watch(wordsLearnedProvider);
+    final scheme = Theme.of(context).colorScheme;
 
     return Card(
-      color: Colors.green.shade50,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const Icon(
+            Icon(
               Icons.auto_stories,
               size: 40,
-              color: Colors.green,
+              color: scheme.tertiary,
             ),
             const SizedBox(height: 8),
             Text(
               '$wordsLearned',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: scheme.onSurface,
                   ),
             ),
             Text(
               'Words Learned',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: scheme.onSurfaceVariant),
             ),
             Text(
               'of $targetVocabularyCount',
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelSmall
+                  ?.copyWith(color: scheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -184,6 +195,7 @@ class _ReviewStatusCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final wordsDue = ref.watch(wordsDueProvider);
     final todayReviews = ref.watch(todayReviewsProvider);
+    final scheme = Theme.of(context).colorScheme;
 
     return Card(
       child: Padding(
@@ -206,27 +218,33 @@ class _ReviewStatusCard extends ConsumerWidget {
                       Icon(
                         Icons.schedule,
                         size: 20,
-                        color: wordsDue > 0 ? Colors.amber : Colors.grey,
+                        color: wordsDue > 0 ? scheme.primary : scheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 8),
                       Text(
                         '$wordsDue words due for review',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: scheme.onSurface),
                       ),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.check_circle_outline,
                         size: 20,
-                        color: Colors.green,
+                        color: scheme.tertiary,
                       ),
                       const SizedBox(width: 8),
                       Text(
                         '$todayReviews reviewed today',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: scheme.onSurface),
                       ),
                     ],
                   ),
