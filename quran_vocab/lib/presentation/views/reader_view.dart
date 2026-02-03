@@ -136,9 +136,12 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
                             setState(() => _isAudioLoading = true);
                             try {
                               final manager = ref.read(audioManagerProvider);
+                              final segmentsByAyah = await ref
+                                  .read(audioSegmentsBySurahProvider(selectedSurahId).future);
                               await manager.loadSurahAudio(
                                 surahId: selectedSurahId,
                                 ayahCount: ayahCount,
+                                segmentsByAyah: segmentsByAyah,
                               );
                               ref
                                   .read(loadedSurahIdProvider.notifier)
