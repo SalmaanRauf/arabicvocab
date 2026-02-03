@@ -23,6 +23,7 @@ class AudioManager {
   int? _lastEmittedWordId;
   int? _loadedSurahId;
   int _loadedAyahCount = 0;
+  Map<int, List<Segment>> _segmentsByAyah = const {};
 
   Stream<int?> get activeWordStream => _activeWordController.stream;
 
@@ -46,6 +47,7 @@ class AudioManager {
     _segments = segments;
     _loadedSurahId = null;
     _loadedAyahCount = 0;
+    _segmentsByAyah = const {};
     await _player.setUrl(url);
   }
 
@@ -67,6 +69,7 @@ class AudioManager {
   Future<void> loadSurahAudio({
     required int surahId,
     required int ayahCount,
+    Map<int, List<Segment>> segmentsByAyah = const {},
   }) async {
     final urls = buildSurahUrls(surahId, ayahCount);
     final source = ConcatenatingAudioSource(
@@ -77,6 +80,7 @@ class AudioManager {
     _segments = [];
     _loadedSurahId = surahId;
     _loadedAyahCount = ayahCount;
+    _segmentsByAyah = segmentsByAyah;
     await _player.setAudioSource(source);
   }
 
@@ -93,6 +97,11 @@ class AudioManager {
   }) async {
     if (_loadedSurahId != surahId) return;
     if (ayahNumber < 1 || ayahNumber > _loadedAyahCount) return;
+    _segments = _segmentsByAyah[ayahNumber] ?? const [];
+    if (_lastEmittedWordId != null) {
+      _lastEmittedWordId = null;
+      _activeWordController.add(null);
+    }
     await _player.seek(Duration.zero, index: ayahNumber - 1);
     await _player.play();
   }
