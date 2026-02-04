@@ -76,6 +76,7 @@ flutter:
     - assets/data/ayahs_full.json
     - assets/data/words_sample.json
     - assets/data/words_full.json
+    - assets/data/daily_lessons.json
     - assets/data/roots.json
     - assets/data/lessons.json
     - assets/data/audio_align/Alafasy_128kbps.json

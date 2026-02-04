@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'models/ayah.dart';
+import 'models/daily_lesson.dart';
 import 'models/root.dart';
 import 'models/surah.dart';
 import 'models/word.dart';
@@ -18,6 +19,9 @@ class DataLoader {
   List<Word>? _allWords;
   List<Root>? _roots;
   Map<int, Root>? _rootsById;
+  List<DailyLesson>? _dailyLessons;
+  Map<int, DailyLesson>? _dailyLessonsByDay;
+  Map<String, DailyLesson>? _dailyLessonsById;
 
   bool get isLoaded => _surahs != null;
 
@@ -28,15 +32,26 @@ class DataLoader {
     final ayahsJson = await rootBundle.loadString('assets/data/ayahs_full.json');
     final wordsJson = await rootBundle.loadString('assets/data/words_full.json');
     final rootsJson = await rootBundle.loadString('assets/data/roots.json');
+    final dailyLessonsJson =
+        await rootBundle.loadString('assets/data/daily_lessons.json');
 
     final surahsList = (jsonDecode(surahsJson) as List).cast<Map<String, dynamic>>();
     final ayahsList = (jsonDecode(ayahsJson) as List).cast<Map<String, dynamic>>();
     final wordsList = (jsonDecode(wordsJson) as List).cast<Map<String, dynamic>>();
     final rootsList = (jsonDecode(rootsJson) as List).cast<Map<String, dynamic>>();
+    final dailyLessonsList =
+        (jsonDecode(dailyLessonsJson) as List).cast<Map<String, dynamic>>();
 
     _surahs = surahsList.map((e) => Surah.fromJson(e)).toList();
     _roots = rootsList.map((e) => Root.fromJson(e)).toList();
     _rootsById = {for (final r in _roots!) r.id: r};
+    _dailyLessons = dailyLessonsList.map(DailyLesson.fromJson).toList();
+    _dailyLessonsByDay = {
+      for (final lesson in _dailyLessons!) lesson.dayIndex: lesson,
+    };
+    _dailyLessonsById = {
+      for (final lesson in _dailyLessons!) lesson.id: lesson,
+    };
 
     // Build ayahs with sequential IDs
     int ayahId = 1;
@@ -129,6 +144,7 @@ class DataLoader {
   List<Ayah> get ayahs => _ayahs ?? [];
   List<Word> get words => _allWords ?? [];
   List<Root> get roots => _roots ?? [];
+  List<DailyLesson> get dailyLessons => _dailyLessons ?? [];
 
   Surah? getSurah(int id) => _surahs?.where((s) => s.id == id).firstOrNull;
 
@@ -150,6 +166,10 @@ class DataLoader {
 
   Root? getRootByText(String text) =>
       _roots?.where((r) => r.rootText == text).firstOrNull;
+
+  DailyLesson? getLessonByDay(int dayIndex) => _dailyLessonsByDay?[dayIndex];
+
+  DailyLesson? getLessonById(String id) => _dailyLessonsById?[id];
 
   List<Word> searchWords(String query) {
     if (query.isEmpty) return [];
