@@ -6,7 +6,7 @@ import '../../data/models/root.dart';
 import '../../data/models/surah.dart';
 import '../../data/models/word.dart';
 
-final dataLoaderProvider = FutureProvider((ref) async {
+final dataLoaderProvider = FutureProvider<DataLoader>((ref) async {
   final loader = DataLoader.instance;
   await loader.load();
   return loader;
