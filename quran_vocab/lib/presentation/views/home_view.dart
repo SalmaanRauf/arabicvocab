@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../routes/app_router.dart';
+import '../state/daily_lesson_providers.dart';
 import '../state/quran_providers.dart';
 
 class HomeView extends ConsumerWidget {
@@ -16,6 +17,11 @@ class HomeView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Quranic Vocabulary'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.today),
+            tooltip: 'Daily Lesson',
+            onPressed: () => context.go(AppRouter.dailyLessonPath),
+          ),
           IconButton(
             icon: const Icon(Icons.bar_chart),
             tooltip: 'Progress',
@@ -44,6 +50,7 @@ class HomeView extends ConsumerWidget {
         data: (surahs) => Column(
           children: [
             _buildHeader(context),
+            _DailyLessonCard(),
             Expanded(child: _buildSurahList(context, ref, surahs)),
           ],
         ),
@@ -150,6 +157,61 @@ class HomeView extends ConsumerWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _DailyLessonCard extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lessonAsync = ref.watch(todayLessonProvider);
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: lessonAsync.when(
+            data: (lesson) {
+              if (lesson == null) {
+                return const Text('Daily lesson unavailable.');
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Today\'s Lesson',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    lesson.title,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Surah ${lesson.surahId}, Ayah ${lesson.ayahStart}-${lesson.ayahEnd}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 12),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: FilledButton(
+                      onPressed: () => context.go(AppRouter.dailyLessonPath),
+                      child: const Text('Open lesson'),
+                    ),
+                  ),
+                ],
+              );
+            },
+            loading: () => const LinearProgressIndicator(),
+            error: (err, _) => Text('Failed to load lesson: $err'),
+          ),
+        ),
+      ),
     );
   }
 }

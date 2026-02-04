@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../views/curriculum_view.dart';
+import '../views/daily_lesson_view.dart';
 import '../views/dashboard_view.dart';
 import '../views/home_view.dart';
 import '../views/lesson_detail_view.dart';
@@ -16,6 +17,7 @@ class AppRouter {
   static const String curriculumPath = '/curriculum';
   static const String lessonPath = '/lesson';
   static const String dashboardPath = '/dashboard';
+  static const String dailyLessonPath = '/daily';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -47,8 +49,11 @@ class AppRouter {
         path: dashboardPath,
         builder: (context, state) => const DashboardView(),
       ),
+      GoRoute(
+        path: dailyLessonPath,
+        builder: (context, state) => const DailyLessonView(),
+      ),
     ],
   );
 }
-
 
