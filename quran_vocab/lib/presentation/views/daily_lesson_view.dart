@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../data/models/ayah.dart';
 import '../../data/models/daily_lesson.dart';
-import '../routes/app_router.dart';
 import '../state/audio_providers.dart';
 import '../state/daily_lesson_providers.dart';
 import '../state/quran_providers.dart';
@@ -32,10 +29,6 @@ class _DailyLessonViewState extends ConsumerState<DailyLessonView> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go(AppRouter.homePath),
-        ),
         title: const Text('Daily Lesson'),
         actions: [
           if (_selectedDayIndex != null)
