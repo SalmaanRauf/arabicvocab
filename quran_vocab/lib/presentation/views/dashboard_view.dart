@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
-import '../routes/app_router.dart';
 import '../state/dashboard_provider.dart';
 
 class DashboardView extends ConsumerWidget {
@@ -13,10 +10,6 @@ class DashboardView extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Progress'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go(AppRouter.homePath),
-        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
