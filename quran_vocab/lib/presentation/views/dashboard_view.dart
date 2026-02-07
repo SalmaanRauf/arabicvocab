@@ -13,10 +13,6 @@ class DashboardView extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Progress'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go(AppRouter.homePath),
-        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
