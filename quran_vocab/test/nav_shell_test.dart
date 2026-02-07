@@ -67,10 +67,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(NavigationBar), findsOneWidget);
-    expect(find.text('Home'), findsOneWidget);
-    expect(find.text('Quran'), findsOneWidget);
-    expect(find.text('Daily'), findsOneWidget);
-    expect(find.text('Review'), findsOneWidget);
-    expect(find.text('Progress'), findsOneWidget);
+    expect(find.widgetWithText(NavigationDestination, 'Home'), findsOneWidget);
+    expect(find.widgetWithText(NavigationDestination, 'Quran'), findsOneWidget);
+    expect(find.widgetWithText(NavigationDestination, 'Daily'), findsOneWidget);
+    expect(find.widgetWithText(NavigationDestination, 'Review'), findsOneWidget);
+    expect(find.widgetWithText(NavigationDestination, 'Progress'),
+        findsOneWidget);
   });
 }

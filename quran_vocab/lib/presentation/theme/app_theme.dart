@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  static bool get _useGoogleFonts => GoogleFonts.config.allowRuntimeFetching;
+
+  static TextTheme _loraTextTheme(TextTheme base) {
+    return _useGoogleFonts ? GoogleFonts.loraTextTheme(base) : base;
+  }
+
+  static TextStyle _soraTextStyle([TextStyle? base]) {
+    return _useGoogleFonts
+        ? GoogleFonts.sora(textStyle: base)
+        : (base ?? const TextStyle());
+  }
+
   static ThemeData light() {
     final scheme = ColorScheme(
       brightness: Brightness.light,
@@ -101,24 +113,24 @@ class AppTheme {
   }
 
   static ThemeData _applyTypography(ThemeData base) {
-    final textTheme = GoogleFonts.loraTextTheme(base.textTheme);
+    final textTheme = _loraTextTheme(base.textTheme);
     return base.copyWith(
       textTheme: textTheme.copyWith(
-        displayLarge: GoogleFonts.sora(textStyle: textTheme.displayLarge),
-        displayMedium: GoogleFonts.sora(textStyle: textTheme.displayMedium),
-        displaySmall: GoogleFonts.sora(textStyle: textTheme.displaySmall),
-        headlineLarge: GoogleFonts.sora(textStyle: textTheme.headlineLarge),
-        headlineMedium: GoogleFonts.sora(textStyle: textTheme.headlineMedium),
-        headlineSmall: GoogleFonts.sora(textStyle: textTheme.headlineSmall),
-        titleLarge: GoogleFonts.sora(textStyle: textTheme.titleLarge),
-        titleMedium: GoogleFonts.sora(textStyle: textTheme.titleMedium),
-        titleSmall: GoogleFonts.sora(textStyle: textTheme.titleSmall),
+        displayLarge: _soraTextStyle(textTheme.displayLarge),
+        displayMedium: _soraTextStyle(textTheme.displayMedium),
+        displaySmall: _soraTextStyle(textTheme.displaySmall),
+        headlineLarge: _soraTextStyle(textTheme.headlineLarge),
+        headlineMedium: _soraTextStyle(textTheme.headlineMedium),
+        headlineSmall: _soraTextStyle(textTheme.headlineSmall),
+        titleLarge: _soraTextStyle(textTheme.titleLarge),
+        titleMedium: _soraTextStyle(textTheme.titleMedium),
+        titleSmall: _soraTextStyle(textTheme.titleSmall),
       ),
     );
   }
 
-  static CardTheme _cardTheme(ColorScheme scheme) {
-    return CardTheme(
+  static CardThemeData _cardTheme(ColorScheme scheme) {
+    return CardThemeData(
       color: scheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
@@ -137,10 +149,12 @@ class AppTheme {
       backgroundColor: scheme.background,
       foregroundColor: scheme.onBackground,
       centerTitle: true,
-      titleTextStyle: GoogleFonts.sora(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: scheme.onBackground,
+      titleTextStyle: _soraTextStyle(
+        TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: scheme.onBackground,
+        ),
       ),
       iconTheme: IconThemeData(color: scheme.onBackground),
     );
@@ -171,7 +185,9 @@ class AppTheme {
         backgroundColor: scheme.primary,
         foregroundColor: scheme.onPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        textStyle: GoogleFonts.sora(fontWeight: FontWeight.w600),
+        textStyle: _soraTextStyle(
+          const TextStyle(fontWeight: FontWeight.w600),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
     );
@@ -183,7 +199,9 @@ class AppTheme {
         foregroundColor: scheme.onSurface,
         side: BorderSide(color: scheme.outline),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        textStyle: GoogleFonts.sora(fontWeight: FontWeight.w600),
+        textStyle: _soraTextStyle(
+          const TextStyle(fontWeight: FontWeight.w600),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
     );
@@ -193,7 +211,9 @@ class AppTheme {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: scheme.primary,
-        textStyle: GoogleFonts.sora(fontWeight: FontWeight.w600),
+        textStyle: _soraTextStyle(
+          const TextStyle(fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }

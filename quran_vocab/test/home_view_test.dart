@@ -62,9 +62,14 @@ void main() {
     );
 
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
     expect(find.text('Today\'s Lesson'), findsOneWidget);
     expect(find.text('Continue Reading'), findsOneWidget);
-    expect(find.text('Quick Actions'), findsOneWidget);
+
+    final dailyFinder = find.text('Daily');
+    await tester.scrollUntilVisible(dailyFinder, 300);
+    expect(dailyFinder, findsOneWidget);
+    expect(find.text('Quran'), findsOneWidget);
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quran_vocab/presentation/widgets/word_chip.dart';
 import 'package:quran_vocab/data/models/word.dart';
@@ -20,9 +21,11 @@ void main() {
     );
 
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Material(
-          child: WordChip(word: word, isHighlighted: true),
+      ProviderScope(
+        child: MaterialApp(
+          home: Material(
+            child: WordChip(word: word, isHighlighted: true),
+          ),
         ),
       ),
     );
